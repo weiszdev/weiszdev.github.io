@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jonathan Weisz — Engineer. Builder. Thriver.</title>
+  <meta name="description" content="Portfolio of Jonathan Weisz — Mechanical Engineer, Chiropractic Doctoral Student, Cancer Thriver, Neuroscience Geek, and Builder of Digital Products.">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0f172a;
+      --navy-light: #1e293b;
+      --slate: #334155;
+      --slate-light: #64748b;
+      --gold: #D4A843;
+      --gold-light: #E8D48B;
+      --cream: #FAF8F5;
+      --white: #ffffff;
+      --green: #22c55e;
+      --blue: #3b82f6;
+      --red: #ef4444;
+      --orange: #f97316;
+      --purple: #a855f7;
+      --teal: #14b8a6;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--cream); }
+    h1,h2,h3,h4 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Nav */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15,23,42,0.95);
+      backdrop-filter: blur(12px);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      border-bottom: 1px solid rgba(212,168,67,0.15);
+    }
+    .nav-brand { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--gold); }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links a { color: var(--slate-light); font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .nav-links a:hover { color: var(--gold); text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      padding: 120px 24px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at 50% 50%, rgba(212,168,67,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-pills {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .pill {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid;
+    }
+    .pill.eng { background: rgba(59,130,246,0.15); color: var(--blue); border-color: rgba(59,130,246,0.3); }
+    .pill.health { background: rgba(34,197,94,0.15); color: var(--green); border-color: rgba(34,197,94,0.3); }
+    .pill.neuro { background: rgba(168,85,247,0.15); color: var(--purple); border-color: rgba(168,85,247,0.3); }
+    .pill.athlete { background: rgba(249,115,22,0.15); color: var(--orange); border-color: rgba(249,115,22,0.3); }
+    .pill.faith { background: rgba(212,168,67,0.15); color: var(--gold); border-color: rgba(212,168,67,0.3); }
+    .pill.thriver { background: rgba(239,68,68,0.15); color: var(--red); border-color: rgba(239,68,68,0.3); }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero .tagline {
+      font-size: 1.1rem;
+      color: var(--slate-light);
+      max-width: 650px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .hero-stat .num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-stat .label { font-size: 0.75rem; color: var(--slate-light); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Section */
+    .section {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-header h2 { font-size: 2rem; margin-bottom: 8px; }
+    .section-header p { color: var(--slate-light); font-size: 0.95rem; max-width: 550px; margin: 0 auto; }
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    /* Bio */
+    .bio-section {
+      background: var(--navy-light);
+      border: 1px solid rgba(212,168,67,0.15);
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto 60px;
+    }
+    .bio-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--navy));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      flex-shrink: 0;
+      border: 3px solid var(--gold);
+    }
+    .bio-text { flex: 1; min-width: 280px; }
+    .bio-text h3 { font-size: 1.6rem; margin-bottom: 4px; }
+    .bio-text .bio-subtitle { color: var(--gold); font-size: 0.9rem; font-weight: 600; margin-bottom: 14px; }
+    .bio-text p { color: var(--slate-light); font-size: 0.92rem; line-height: 1.7; margin-bottom: 12px; }
+    .bio-text p strong { color: var(--cream); }
+
+    /* Project Grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 28px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover {
+      border-color: rgba(212,168,67,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .project-card.featured {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      border-color: rgba(212,168,67,0.2);
+      background: linear-gradient(135deg, var(--navy-light) 0%, rgba(212,168,67,0.05) 100%);
+    }
+    .project-card.featured .card-content { flex: 1; }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .card-icon { font-size: 2rem; }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .tag.health-tech { background: rgba(34,197,94,0.15); color: var(--green); }
+    .tag.prop-tech { background: rgba(59,130,246,0.15); color: var(--blue); }
+    .tag.faith { background: rgba(212,168,67,0.15); color: var(--gold); }
+    .tag.mfg { background: rgba(249,115,22,0.15); color: var(--orange); }
+    .tag.moto { background: rgba(239,68,68,0.15); color: var(--red); }
+    .tag.animal { background: rgba(20,184,166,0.15); color: var(--teal); }
+    .tag.neuro { background: rgba(168,85,247,0.15); color: var(--purple); }
+    .tag.coaching { background: rgba(236,72,153,0.15); color: #ec4899; }
+    .tag.active { background: rgba(34,197,94,0.15); color: var(--green); }
+    .tag.dev { background: rgba(100,116,139,0.15); color: var(--slate-light); }
+
+    .project-card h3 { font-size: 1.3rem; margin-bottom: 6px; color: var(--cream); }
+    .project-card .card-desc { font-size: 0.88rem; color: var(--slate-light); line-height: 1.6; margin-bottom: 14px; }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 10px; text-decoration: none; }
+
+    /* Trauma Bond Feature */
+    .feature-section {
+      background: linear-gradient(135deg, #1a0a0a 0%, var(--navy-light) 50%, #0a0a1a 100%);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 16px;
+      padding: 50px 40px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .feature-section h2 { font-size: 2.2rem; margin-bottom: 10px; }
+    .feature-section h2 span { color: var(--red); }
+    .feature-section .feature-subtitle {
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .feature-section p {
+      color: var(--slate-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .feature-section p strong { color: var(--cream); }
+    .feature-pillars {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+    .feature-pillar {
+      background: rgba(255,255,255,0.05);
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      color: var(--cream);
+      border: 1px solid rgba(255,255,255,0.08);
+      min-width: 120px;
+    }
+    .feature-pillar .fp-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+    .feature-pillar .fp-label { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3px; }
+
+    /* CTA */
+    .cta-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .cta-btn.gold { background: var(--gold); color: var(--navy); }
+    .cta-btn.gold:hover { background: var(--gold-light); text-decoration: none; }
+    .cta-btn.outline { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
+    .cta-btn.outline:hover { background: rgba(212,168,67,0.1); text-decoration: none; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.78rem;
+      color: var(--slate-light);
+    }
+    .footer-links { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .footer-links a { color: var(--slate-light); font-size: 0.78rem; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* Scroll animations */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 700px) {
+      .nav-links a { display: none; }
+      .nav-links a:last-child { display: block; }
+      .hero { padding: 100px 20px 50px; }
+      .hero-stats { gap: 20px; }
+      .bio-section { flex-direction: column; align-items: center; text-align: center; padding: 28px; }
+      .project-card.featured { flex-direction: column; }
+      .project-grid { grid-template-columns: 1fr; }
+      .feature-section { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <span class="nav-brand">JW</span>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#story">Story</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/weiszdev" class="cta-btn outline" style="padding:6px 16px;font-size:0.78rem;">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-pills">
+      <span class="pill eng">Mechanical Engineer</span>
+      <span class="pill health">Chiropractic Doctoral Student</span>
+      <span class="pill neuro">Neuroscience</span>
+      <span class="pill athlete">Ex Pro Athlete</span>
+      <span class="pill thriver">Cancer Thriver</span>
+      <span class="pill faith">Single Father</span>
+    </div>
+    <h1>Jonathan <span>Weisz</span></h1>
+    <p class="tagline">Engineer turned health practitioner building digital tools at the intersection of technology, neuroscience, and human recovery. Every product here was built to solve a real problem for a real person.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="num">11+</span>
+        <span class="label">Live Projects</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">7</span>
+        <span class="label">Industries</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">0</span>
+        <span class="label">Frameworks Used</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="bio-section reveal">
+      <div class="bio-avatar">JW</div>
+      <div class="bio-text">
+        <h3>Jonathan Weisz</h3>
+        <div class="bio-subtitle">Engineer. Builder. Thriver.</div>
+        <p><strong>Mechanical Engineer</strong> by training. <strong>Chiropractic Doctoral student</strong> for 2.5 years. <strong>Ex professional athlete.</strong> Then life hit different — Lyme disease, traumatic brain injury, and cancer — all at once. Instead of folding, he rebuilt.</p>
+        <p>Now a <strong>cancer thriver</strong>, <strong>neuroscience obsessive</strong>, and <strong>single father of 4 years</strong>, Jonathan builds digital products that solve real problems. No frameworks. No dependencies. Plain HTML, CSS, and JavaScript — engineered with the same precision he brought to mechanical systems.</p>
+        <p>Every project below started the same way: someone had a problem, and the tools to fix it didn't exist yet. So he built them.</p>
+        <p style="margin-top:12px;"><strong>Stack:</strong> HTML/CSS/JS. WebGazer.js. Google Apps Script. Cloudinary. Stripe. GitHub Pages. Built with Claude Code.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section" id="projects">
+    <div class="section-header">
+      <h2>The Portfolio</h2>
+      <p>11 live projects across health tech, property management, manufacturing, motorsports, ministry, and more. All static HTML. All deployed on GitHub Pages.</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="project-grid">
+
+      <!-- Featured: NeuroGaze -->
+      <div class="project-card featured reveal">
+        <div>
+          <div class="card-icon" style="font-size:3rem;">🧠</div>
+        </div>
+        <div class="card-content">
+          <div class="card-tags" style="margin-bottom:10px;">
+            <span class="tag neuro">Neuroscience</span>
+            <span class="tag health-tech">Health Tech</span>
+            <span class="tag active">Active</span>
+          </div>
+          <h3>NeuroGaze</h3>
+          <p class="card-desc">Browser-based saccadic eye movement assessment using webcam eye-tracking. Evaluates gaze function across 10 clinical zones, scores performance on latency and accuracy, then prescribes tiered exercise protocols. Zero hardware — runs in any browser. Built for athletic performance fine-tuning, school readiness screening, and vision therapy.</p>
+          <p class="card-desc" style="font-size:0.82rem;color:var(--gold);">$500M sports vision market. No competitor offers zero-hardware browser-native assessment. Projected $820K ARR by Year 3.</p>
+          <a href="https://weiszdev.github.io/neurogaze/neuro-saccades-assessment.html" class="card-link">Launch Tool &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Featured: Healthy Exposure -->
+      <div class="project-card featured reveal">
+        <div>
+          <div class="card-icon" style="font-size:3rem;">🏡</div>
+        </div>
+        <div class="card-content">
+          <div class="card-tags" style="margin-bottom:10px;">
+            <span class="tag health-tech">Environmental Health</span>
+            <span class="tag active">Active</span>
+          </div>
+          <h3>Healthy Exposure</h3>
+          <p class="card-desc">Digital home assessment platform for environmental health. 15-area guided walkthrough identifies mold, formaldehyde, PFAS, VOCs, and carbon monoxide risks. Produces a prioritized remediation plan with cost estimates, supplement recommendations with research links, and a full sales funnel from free PDF to $30K wellness facility programs.</p>
+          <p class="card-desc" style="font-size:0.82rem;color:var(--gold);">Built for Capt. Darren J. Vigil, CIEC, ATP. No direct competitor exists for digital room-by-room + health correlation.</p>
+          <a href="https://weiszdev.github.io/healthyexposure/" class="card-link">View Site &rarr;</a>
+        </div>
+      </div>
+
+      <!-- NotDrWise -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">🩺</div>
+          <div class="card-tags">
+            <span class="tag coaching">Coaching</span>
+            <span class="tag faith">Faith + Health</span>
+          </div>
+        </div>
+        <h3>NotDrWise</h3>
+        <p class="card-desc">Health coaching platform built on the R3 (Recognize, Reframe, Rebuild) and BENR (Body, Emotions, Neuro, Repair) frameworks. Full PWA app with interactive tools, coaching tiers, podcast integration, and Trauma Bond book CTA. Donation-based model through StayTheWay 501(c)(3).</p>
+        <a href="https://notdrwise.com" class="card-link">Visit &rarr;</a>
+      </div>
+
+      <!-- Capital Management -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">🏢</div>
+          <div class="card-tags">
+            <span class="tag prop-tech">PropTech</span>
+            <span class="tag active">Active</span>
+          </div>
+        </div>
+        <h3>Capital Management</h3>
+        <p class="card-desc">Full rent management system for a 5-plex near Sanford Medical Center, Bismarck ND. Landlord dashboard + tenant portal with lease management, payment tracking, deposit workflows, ND-compliant eviction tools, settlement generator, and 3-Day Notice builder. Stripe ACH + DocuSign + TransUnion SmartMove integrated.</p>
+        <a href="https://weiszdev.github.io/capital-mgmt/" class="card-link">View App &rarr;</a>
+      </div>
+
+      <!-- StayTheWay -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">🕊️</div>
+          <div class="card-tags">
+            <span class="tag faith">Ministry</span>
+            <span class="tag active">Active</span>
+          </div>
+        </div>
+        <h3>StayTheWay</h3>
+        <p class="card-desc">501(c)(3) ministry site with faith resources, interactive Bible quizzes, BENR 5-phase spiritual assessment, 7 Pillars teachings, and PWA offline support. BENR assessment maps Body, Emotions, Neuro, and Repair through scripture with personalized 7-day recovery plans.</p>
+        <a href="https://weiszdev.github.io/StayTheWay/" class="card-link">Visit Ministry &rarr;</a>
+      </div>
+
+      <!-- ClickRoof -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">🏠</div>
+          <div class="card-tags">
+            <span class="tag prop-tech">PropTech</span>
+          </div>
+        </div>
+        <h3>ClickRoof</h3>
+        <p class="card-desc">Priceline-style roofing comparison platform. Homeowners see scrolling contractor comparisons with star ratings and price grids. In-network vs out-of-network contractor matching. Consumer landing page + contractor portal for Capital Exteriors.</p>
+        <a href="https://weiszdev.github.io/clickroof/public/index.html" class="card-link">View Demo &rarr;</a>
+      </div>
+
+      <!-- MidMach -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">🏭</div>
+          <div class="card-tags">
+            <span class="tag mfg">Manufacturing</span>
+          </div>
+        </div>
+        <h3>MidMach</h3>
+        <p class="card-desc">Premium website rebuild for Midwestern Machine — CNC machining, laser cutting, robotic welding, and metal fabrication. 14-page site with facility photo showcase, 2D product configurator (Konva.js) for industrial platforms, merch section, and Cloudinary-powered image management.</p>
+        <a href="https://weiszdev.github.io/midmach/" class="card-link">View Site &rarr;</a>
+      </div>
+
+      <!-- Dakota Sky -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">🐕</div>
+          <div class="card-tags">
+            <span class="tag animal">Sporting Dogs</span>
+          </div>
+        </div>
+        <h3>Dakota Sky Pudelpointers</h3>
+        <p class="card-desc">16-page website for a premier Pudelpointer breeding and training operation. REI Cedar aesthetic with deep forest greens, luxury dog photography, Cloudinary CDN, and Google Sheet CMS. Full breed standards, training programs, and puppy availability system.</p>
+        <a href="https://weiszdev.github.io/dakota-sky-pudelpointers/" class="card-link">View Site &rarr;</a>
+      </div>
+
+      <!-- RevMX -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">🏍️</div>
+          <div class="card-tags">
+            <span class="tag moto">Motorsports</span>
+          </div>
+        </div>
+        <h3>RevMX</h3>
+        <p class="card-desc">Supercross and motocross vote prediction tool embedded on RevMX.com via WordPress iframe. Monday Moto Madness race picks, How to Watch guides for Detroit SX/GNCC/MXGP weekends. Dark/red motorsport aesthetic with SEO optimization.</p>
+        <a href="https://revmx.com" class="card-link">Visit RevMX &rarr;</a>
+      </div>
+
+      <!-- PaintingGator -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">🎨</div>
+          <div class="card-tags">
+            <span class="tag moto">Creator Tools</span>
+          </div>
+        </div>
+        <h3>PaintingGator</h3>
+        <p class="card-desc">YouTube live stream integration for Shopify. Pulsing "LIVE NOW" header banner with auto-detection via oEmbed, 16:9 live stream player with offline placeholder. Built for a custom helmet painting channel.</p>
+        <a href="#" class="card-link">Shopify Integration &rarr;</a>
+      </div>
+
+      <!-- Braus Atelier -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <div class="card-icon">⚡</div>
+          <div class="card-tags">
+            <span class="tag mfg">Custom Craft</span>
+          </div>
+        </div>
+        <h3>Braus Atelier</h3>
+        <p class="card-desc">Promotion package and content strategy for a custom helmet painting business. Master strategy document, content calendar, and marketing materials for premium hand-painted motorsport helmets.</p>
+        <a href="#" class="card-link">Coming Soon &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Trauma Bond Feature -->
+  <section class="section" id="story">
+    <div class="feature-section reveal">
+      <div class="feature-subtitle">The Story Behind the Work</div>
+      <h2>Trauma <span>Bond</span></h2>
+      <p>Mechanical engineer. Professional athlete. Then Lyme disease, traumatic brain injury, and cancer — all converged. The medical system offered prescriptions. The system offered labels. Neither offered a path forward.</p>
+      <p><strong>Four years as a single father</strong> taught what no degree could: that healing isn't passive. It's engineered. You identify the broken system, you trace it to the root, and you rebuild — one variable at a time.</p>
+      <p>That's what <strong>Trauma Bond</strong> is about. Not the clinical definition of trauma bonding — the real one. The bond between what happened to your body, what it did to your nervous system, and who you became because of it. And how faith, neuroscience, and deliberate action break the cycle.</p>
+
+      <div class="feature-pillars">
+        <div class="feature-pillar">
+          <span class="fp-icon">🧠</span>
+          <span class="fp-label">Neuro</span>
+          <div style="font-size:0.75rem;color:var(--slate-light);margin-top:2px;">What trauma does to your nervous system</div>
+        </div>
+        <div class="feature-pillar">
+          <span class="fp-icon">🫁</span>
+          <span class="fp-label">Body</span>
+          <div style="font-size:0.75rem;color:var(--slate-light);margin-top:2px;">What it does to your gut and biology</div>
+        </div>
+        <div class="feature-pillar">
+          <span class="fp-icon">🪞</span>
+          <span class="fp-label">Identity</span>
+          <div style="font-size:0.75rem;color:var(--slate-light);margin-top:2px;">What it does to who you believe you are</div>
+        </div>
+        <div class="feature-pillar">
+          <span class="fp-icon">✝️</span>
+          <span class="fp-label">Faith</span>
+          <div style="font-size:0.75rem;color:var(--slate-light);margin-top:2px;">Why faith matters for healing</div>
+        </div>
+      </div>
+
+      <p style="font-size:0.88rem;font-style:italic;color:var(--gold);margin-top:10px;">"People are not broken because they're rebellious — they're bound because they're wounded."</p>
+
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://notdrwise.com" class="cta-btn gold">NotDrWise Coaching</a>
+        <a href="https://weiszdev.github.io/StayTheWay/" class="cta-btn outline">StayTheWay Ministry</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="https://github.com/weiszdev">GitHub</a>
+      <a href="https://notdrwise.com">NotDrWise</a>
+      <a href="https://weiszdev.github.io/StayTheWay/">StayTheWay</a>
+      <a href="https://weiszdev.github.io/healthyexposure/">Healthy Exposure</a>
+      <a href="https://weiszdev.github.io/neurogaze/neuro-saccades-assessment.html">NeuroGaze</a>
+      <a href="mailto:jcw.agent1@gmail.com">Contact</a>
+    </div>
+    <p>Built by Jonathan Weisz with Claude Code. Plain HTML. No frameworks. No dependencies.</p>
+    <p style="margin-top:6px;">&copy; 2026 Jonathan Weisz. All rights reserved.</p>
+  </footer>
+
+<script>
+// Scroll reveal
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el) { observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>
