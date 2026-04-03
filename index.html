@@ -169,6 +169,51 @@
     .bio-text p { color: var(--slate-light); font-size: 0.92rem; line-height: 1.7; margin-bottom: 12px; }
     .bio-text p strong { color: var(--cream); }
 
+    /* Timeline */
+    .timeline { max-width: 700px; margin: 0 auto; position: relative; padding-left: 30px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold), var(--navy));
+    }
+    .tl-item { position: relative; padding-bottom: 24px; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--navy);
+    }
+    .tl-date { font-size: 0.72rem; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .tl-title { font-size: 0.95rem; color: var(--cream); font-weight: 600; margin-top: 2px; }
+    .tl-org { font-size: 0.82rem; color: var(--slate-light); }
+    .tl-detail { font-size: 0.8rem; color: var(--slate); margin-top: 2px; }
+
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      max-width: 700px;
+      margin: 20px auto 0;
+    }
+    .cred-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+    }
+    .cred-item .cred-num { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--gold); }
+    .cred-item .cred-label { font-size: 0.72rem; color: var(--slate-light); text-transform: uppercase; letter-spacing: 0.3px; margin-top: 2px; }
+
     /* Project Grid */
     .project-grid {
       display: grid;
@@ -376,12 +421,125 @@
     <div class="bio-section reveal">
       <div class="bio-avatar">JW</div>
       <div class="bio-text">
-        <h3>Jonathan Weisz</h3>
-        <div class="bio-subtitle">Engineer. Builder. Thriver.</div>
-        <p><strong>Mechanical Engineer</strong> by training. <strong>Chiropractic Doctoral student</strong> for 2.5 years. <strong>Ex professional athlete.</strong> Then life hit different — Lyme disease, traumatic brain injury, and cancer — all at once. Instead of folding, he rebuilt.</p>
-        <p>Now a <strong>cancer thriver</strong>, <strong>neuroscience obsessive</strong>, and <strong>single father of 4 years</strong>, Jonathan builds digital products that solve real problems. No frameworks. No dependencies. Plain HTML, CSS, and JavaScript — engineered with the same precision he brought to mechanical systems.</p>
-        <p>Every project below started the same way: someone had a problem, and the tools to fix it didn't exist yet. So he built them.</p>
-        <p style="margin-top:12px;"><strong>Stack:</strong> HTML/CSS/JS. WebGazer.js. Google Apps Script. Cloudinary. Stripe. GitHub Pages. Built with Claude Code.</p>
+        <h3>Jonathan C. Weisz</h3>
+        <div class="bio-subtitle">BS Mechanical Engineering, NDSU '06 | Chiropractic Doctoral Student | SOLIDWORKS Certified Expert</div>
+        <p><strong>North Dakota farm kid</strong> turned mechanical engineer. Co-designed the <strong>industry-first seated elliptical</strong> at Octane Fitness. Became one of only <strong>32 SOLIDWORKS Certified Experts in Minnesota</strong> — 3,500+ technical support cases, 100+ engineers trained. Managed engineering at Custom Stainless Enclosures. Designed assembly line tooling at Bobcat.</p>
+        <p>Then pivoted into health — <strong>2.5 years of Chiropractic Doctoral studies</strong> in Functional Medicine and Applied Kinesiology. Studied human anatomy, physiology, body mechanics, acupuncture. That's when Lyme disease, traumatic brain injury, and cancer converged. Instead of folding, he rebuilt.</p>
+        <p>Now a <strong>cancer thriver</strong>, <strong>neuroscience obsessive</strong>, <strong>single father of 4 years</strong>, and <strong>ex pro athlete</strong> (Gospel Motorcycle Motocross Outreach, competitive motorsports), Jonathan builds digital products that solve real problems — with the same precision he brought to mechanical systems and the same tenacity that got him through treatment.</p>
+        <p><strong>24 years of web ministry.</strong> 16 years of children's ministry. 10 years of jail ministry. 6 years as assisting pastor. Church lead for Billy Graham's Rock the River — invited 30,000 people with a team of 50. Six-month mission trip to Israel for church planting in Haifa. Mission trips to Turkey, Egypt, Jordan. Served officers at the RNC through the SSPD Chaplains ministry during Operation Pillar of Defense.</p>
+        <p style="margin-top:12px;"><strong>Stack:</strong> HTML/CSS/JS. SOLIDWORKS. WebGazer.js. Google Apps Script. Cloudinary. Stripe. GitHub Pages. Built with Claude Code.</p>
+      </div>
+    </div>
+
+    <div class="cred-grid reveal">
+      <div class="cred-item">
+        <div class="cred-num">3,500+</div>
+        <div class="cred-label">Technical Support Cases</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">100+</div>
+        <div class="cred-label">Engineers Trained</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">3,000+</div>
+        <div class="cred-label">Hours SOLIDWORKS</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">24</div>
+        <div class="cred-label">Years Web Ministry</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">30K</div>
+        <div class="cred-label">People Reached (Billy Graham Event)</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">6</div>
+        <div class="cred-label">Years Assisting Pastor</div>
+      </div>
+    </div>
+
+    <!-- Career Timeline -->
+    <div style="margin-top:60px;" class="reveal">
+      <div class="section-header">
+        <h2>The Journey</h2>
+        <p>From the farm to the factory floor to the mission field to the doctor's office — and back to building.</p>
+        <div class="section-divider"></div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">1995 — 2007</div>
+          <div class="tl-title">Weisz Farm</div>
+          <div class="tl-org">Underwood, ND</div>
+          <div class="tl-detail">Mechanic, welder, machinist, gunsmith. Where precision started.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2001 &amp; 2005</div>
+          <div class="tl-title">Engineer Intern — IR Bobcat</div>
+          <div class="tl-org">Bismarck, ND</div>
+          <div class="tl-detail">Assembly line tooling &amp; fixture design. Robotic subassembly delivery.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2006</div>
+          <div class="tl-title">BS Mechanical Engineering — NDSU</div>
+          <div class="tl-org">North Dakota State University, Fargo</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2007 — 2010</div>
+          <div class="tl-title">Mechanical Engineer I — Octane Fitness</div>
+          <div class="tl-org">Brooklyn Park, MN</div>
+          <div class="tl-detail">New product R&amp;D. Co-designer of the industry-first seated elliptical. 3,000+ hours SOLIDWORKS.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2008 — 2014</div>
+          <div class="tl-title">Assisting Pastor — Calvary Chapel Saint Paul</div>
+          <div class="tl-org">Saint Paul, MN</div>
+          <div class="tl-detail">6 years. Weekly teaching, leadership training, worship, children's ministry, jail ministry.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2009</div>
+          <div class="tl-title">Billy Graham — Rock the River</div>
+          <div class="tl-detail">Church lead. Invited 30,000 people with a team of 50.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2010 — 2011</div>
+          <div class="tl-title">Quality Test Engineer II — Octane Fitness</div>
+          <div class="tl-org">Brooklyn Park, MN</div>
+          <div class="tl-detail">Designed LabVIEW-controlled robotic life cycle tester. Safety testing, regulatory compliance.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2012</div>
+          <div class="tl-title">Six-Month Mission Trip — Israel</div>
+          <div class="tl-org">Haifa, Israel + Turkey</div>
+          <div class="tl-detail">Church planting. Networked with leadership across Israel. Served during Operation Pillar of Defense.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2013 — 2017</div>
+          <div class="tl-title">Application Engineer — Symmetry Solutions</div>
+          <div class="tl-org">Brooklyn Park, MN</div>
+          <div class="tl-detail">SOLIDWORKS Certified Expert (1 of 32 in MN). 3,500+ support cases. Trained 100+ engineers. Hundreds of support videos and blogs.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2017 — 2019</div>
+          <div class="tl-title">Engineering Manager — Custom Stainless Enclosures</div>
+          <div class="tl-org">Woodbury, MN</div>
+          <div class="tl-detail">Managed engineering staff, servers, website, phone systems, Google Ads, YouTube media. Designed custom enclosures.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2019 — 2021</div>
+          <div class="tl-title">Chiropractic Doctoral Student</div>
+          <div class="tl-org">Bloomington, MN</div>
+          <div class="tl-detail">Functional Medicine focus. Applied Kinesiology. Human anatomy, physiology, body mechanics, acupuncture.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2021 — Present</div>
+          <div class="tl-title">Lyme, TBI, Cancer — Then Rebuilding</div>
+          <div class="tl-detail">Cancer thriver. Single father. Built 11+ digital products. Founded NotDrWise coaching. Launched StayTheWay 501(c)(3). Author of Trauma Bond.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2026</div>
+          <div class="tl-title">Digital Product Builder — weiszdev</div>
+          <div class="tl-detail">11 live projects across 7 industries. NeuroGaze, Healthy Exposure, Capital Management, ClickRoof, MidMach, Dakota Sky, RevMX — all plain HTML, built with Claude Code.</div>
+        </div>
       </div>
     </div>
   </section>
