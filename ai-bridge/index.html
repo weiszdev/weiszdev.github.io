@@ -43,6 +43,8 @@ a:hover{border-bottom-color:var(--warmdeep)}
 .hero p{max-width:640px;margin:0 auto;font-size:1.09rem;color:var(--textmid)}
 
 section{padding:54px 0}
+section[id],.pillar[id]{scroll-margin-top:78px}
+.pillar[id]:target{border-left-color:var(--gold);background:#fffdf7}
 section.alt{background:var(--card2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 
 /* hook */
@@ -54,6 +56,22 @@ section.alt{background:var(--card2);border-top:1px solid var(--border);border-bo
 .hookfoot{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);font-family:-apple-system,BlinkMacSystemFont,sans-serif}
 .hookfoot span{display:block;font-size:.95rem;color:var(--textlight)}
 .hookfoot strong{display:block;margin-top:6px;font-size:1.02rem;color:var(--warmdeep);font-weight:700}
+
+/* situations */
+.sit{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;box-shadow:var(--shadow);position:relative}
+.sit-head{display:flex;gap:16px;align-items:baseline;margin-bottom:12px;flex-wrap:wrap}
+.sit-n{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:800;font-size:.74rem;letter-spacing:.14em;color:var(--warm);white-space:nowrap}
+.sit h3{margin:0;font-size:1.18rem;font-style:italic;color:var(--text)}
+.sit .scene{margin:0;font-size:1.02rem;color:var(--textmid)}
+.sit .scene+.scene{margin-top:11px}
+.sit-cost{margin-top:16px;padding-top:15px;border-top:1px solid var(--border);font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:.89rem;line-height:1.65;color:var(--textmid);display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.sit-cost .tag{font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:var(--red);font-weight:700;background:var(--redbg);border:1px solid rgba(192,57,43,.18);border-radius:20px;padding:3px 10px;white-space:nowrap;flex-shrink:0}
+.sit-cost .txt{flex:1;min-width:220px}
+.sit-link{margin-top:13px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:.79rem;letter-spacing:.03em}
+.sit-link a{color:var(--warmdeep);font-weight:600}
+.tally{background:#fffdf7;border:1px solid rgba(184,134,11,.28);border-radius:var(--radius);padding:26px 30px;margin-top:26px;text-align:center}
+.tally p{margin:0;font-size:1.14rem;color:var(--textmid)}
+.tally strong{color:var(--gold);font-style:italic}
 h2{font-size:clamp(1.5rem,3.4vw,2.05rem);line-height:1.25;margin:0 0 8px;font-weight:400}
 h3{font-size:1.22rem;margin:0 0 8px;font-weight:400}
 .lede{color:var(--textlight);font-size:1.02rem;margin:0 0 28px}
@@ -124,6 +142,7 @@ footer .small{color:var(--textmid)}
   <div class="nav-in">
     <a href="../">← Jonathan Weisz</a>
     <div class="nav-links">
+      <a href="#situations">Situations</a>
       <a href="#gap">The Gap</a>
       <a href="#pillars">7 Pillars</a>
       <a href="#math">The Math</a>
@@ -153,6 +172,75 @@ footer .small{color:var(--textmid)}
       <span>I'm not here to sell you AI. You've already bought it.</span>
       <strong>88% of companies use it. About a third have ever made it move a number.</strong>
     </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== SITUATIONS ===== -->
+<section class="alt" id="situations">
+<div class="container">
+  <div class="kicker">Recognition</div>
+  <h2>Seven situations</h2>
+  <p class="lede">Not problems in the abstract — specific afternoons that happen in consumer product companies. Read these before the numbers. If you have lived three of them, the rest of this page is just arithmetic.</p>
+
+  <div class="sit">
+    <div class="sit-head"><div class="sit-n">Situation 01</div><h3>You have designed this part before.</h3></div>
+    <p class="scene">An engineer spends two days modeling a bracket. It already exists in the vault — designed eighteen months ago, saved under a name that made sense to whoever saved it, findable by nobody since. Two weeks later the same thing happens with a fastener callout.</p>
+    <p class="scene">Meanwhile, somewhere else, a supplier is building to a drawing two revisions behind, and you will find out when the pallet arrives with the old geometry on it.</p>
+    <div class="sit-cost"><span class="tag">What it costs</span><span class="txt">Full engineering rate to recreate assets you already own — and every duplicate part number carries tooling, inventory and sustaining cost for the rest of its life. Plus the scrap run nobody budgeted.</span></div>
+    <div class="sit-link">→ <a href="#p1">Pillar 01 — The Product Data Spine</a></div>
+  </div>
+
+  <div class="sit">
+    <div class="sit-head"><div class="sit-n">Situation 02</div><h3>You found out from a review.</h3></div>
+    <p class="scene">A one-star review says the adjustment knob strips out after a month. Somebody forwards it around. Engineering asks how widespread it is, and the honest answer is that nobody knows — you would have to read the tickets.</p>
+    <p class="scene">Eventually someone does, and finds four hundred of them. The first one came in during week two. You are now in month seven, three production runs deep, with the same knob in every unit on a Costco floor.</p>
+    <div class="sit-cost"><span class="tag">What it costs</span><span class="txt">Every unit built between week two and month seven carries a defect you already had the data to catch. Warranty, returns, review damage on the listing, and a retailer conversation you did not want to have.</span></div>
+    <div class="sit-link">→ <a href="#p2">Pillar 02 — The Quality Signal Loop</a></div>
+  </div>
+
+  <div class="sit">
+    <div class="sit-head"><div class="sit-n">Situation 03</div><h3>Overstocked and sold out. Same week.</h3></div>
+    <p class="scene">The warehouse is full of last year's colorway, which is not moving and will be marked down. At the same time the hero SKU has been dark for six weeks in the middle of Q4, and the club buyer noticed before you did.</p>
+    <p class="scene">The forecast that produced both outcomes was one spreadsheet trying to serve two channels that behave nothing alike — enormous lumpy club orders and smooth small DTC velocity, averaged into a single number that describes neither.</p>
+    <div class="sit-cost"><span class="tag">What it costs</span><span class="txt">Cash frozen in inventory that will sell at a discount if it sells at all, and margin left on the table in the one quarter that matters. Obsolescence is the largest single component of carrying cost for a model-year product.</span></div>
+    <div class="sit-link">→ <a href="#p3">Pillar 03 — Demand &amp; Inventory Intelligence</a></div>
+  </div>
+
+  <div class="sit">
+    <div class="sit-head"><div class="sit-n">Situation 04</div><h3>The remittance came in light again.</h3></div>
+    <p class="scene">Forty thousand dollars short. There is a deduction code. Somebody could figure out what happened — an ASN that went out late, a label that failed inspection, a pallet built to the wrong spec — but tracing it takes a day and there are nine more like it this month.</p>
+    <p class="scene">So finance books it as cost of doing business. Nobody disputes the invalid ones. Nobody routes the valid ones back to the process that caused them, so next quarter it happens again, and the quarter after that.</p>
+    <div class="sit-cost"><span class="tag">What it costs</span><span class="txt">Walmart charges 3% of COGS on OTIF failures. Target charges 5% with a $150 minimum. Costco publishes nothing and assesses case by case — which means you cannot even forecast it. The recurring version of this is the expensive part.</span></div>
+    <div class="sit-link">→ <a href="#p4">Pillar 04 — Retail Compliance &amp; Deduction Defense</a></div>
+  </div>
+
+  <div class="sit">
+    <div class="sit-head"><div class="sit-n">Situation 05</div><h3>The discount window closed while the invoice sat.</h3></div>
+    <p class="scene">A supplier calls asking about payment. Your AP lead spends twenty minutes finding out that the invoice has been in an exception queue for nine days because a line item did not match the PO by four dollars.</p>
+    <p class="scene">The 2% early-payment discount expired on day eleven. This happens often enough that nobody flags it anymore.</p>
+    <div class="sit-cost"><span class="tag">What it costs</span><span class="txt">The industry average is $9.84 to process one invoice; the top performers do it for $2.65. Roughly a fifth of AP's time goes to answering supplier inquiries about invoices they cannot find. This is the most reliably fixable line in the business.</span></div>
+    <div class="sit-link">→ <a href="#p5">Pillar 05 — Order-to-Cash and Procure-to-Pay</a></div>
+  </div>
+
+  <div class="sit">
+    <div class="sit-head"><div class="sit-n">Situation 06</div><h3>You are shooting the same product for the fourth time.</h3></div>
+    <p class="scene">New colorway, same product. Full production cycle — studio, lighting, photographer, retouching. Then the retailer updates their content template and someone retypes every spec by hand into a new format, for every SKU, from a spreadsheet that may or may not match what engineering last released.</p>
+    <p class="scene">Two of the dimensions on the live listing are wrong. They have been wrong for a year.</p>
+    <div class="sit-cost"><span class="tag">What it costs</span><span class="txt">Production spend that scales linearly with SKU count when it should not, launch dates gated by a photo shoot, and listing errors that drive returns and support contacts — which loops straight back to Situation 02.</span></div>
+    <div class="sit-link">→ <a href="#p6">Pillar 06 — Commercial Content &amp; Media Efficiency</a></div>
+  </div>
+
+  <div class="sit">
+    <div class="sit-head"><div class="sit-n">Situation 07</div><h3>The seats renewed and nobody noticed.</h3></div>
+    <p class="scene">You bought AI licenses last year. There was a kickoff. A few people were excited. Twelve months later the renewal comes through finance and someone asks what it did for us — and the room is quiet, because the honest answer is that three people use it to rewrite emails.</p>
+    <p class="scene">Nobody was trained to be inventive with it. Nobody owned a number. So usage collapsed to whatever the vendor demoed on day one, and the tool became a line item instead of a capability.</p>
+    <div class="sit-cost"><span class="tag">What it costs</span><span class="txt">The license fee is the small part. The real cost is a year of compounding advantage handed to the third of manufacturers who wired this into how the business actually runs — plus an organization that now believes AI does not work here.</span></div>
+    <div class="sit-link">→ <a href="#p7">Pillar 07 — Capability, Governance and the Innovation Habit</a></div>
+  </div>
+
+  <div class="tally">
+    <p>None of these are technology failures. Every one of them is a system that already holds the answer, and <strong>nobody with the time to go get it.</strong></p>
   </div>
 </div>
 </section>
@@ -222,7 +310,7 @@ footer .small{color:var(--textmid)}
   <p class="lede">Each pillar names the failure mode, the intervention, the evidence behind it, and the modeled dollar effect. Where the evidence does not exist, it says so.</p>
 
   <!-- P1 -->
-  <div class="pillar">
+  <div class="pillar" id="p1">
     <div class="pillar-head"><div class="pnum">Pillar 01</div><h3>The Product Data Spine</h3></div>
     <div class="psys">PDM · PLM · SOLIDWORKS · Engineering</div>
     <div class="row"><div class="lbl">Failure</div><p class="val">Engineers cannot find what already exists, so they rebuild it. Revisions live in three places. The BOM the factory builds from and the BOM engineering thinks is current are not the same document. Every change is a manual chase.</p></div>
@@ -233,7 +321,7 @@ footer .small{color:var(--textmid)}
   </div>
 
   <!-- P2 -->
-  <div class="pillar">
+  <div class="pillar" id="p2">
     <div class="pillar-head"><div class="pnum">Pillar 02</div><h3>The Quality Signal Loop</h3></div>
     <div class="psys">Customer Service → Engineering · The Bridge</div>
     <div class="quote">"Maybe you could also help with building better quality data reports from AI to see our product issues and know what things to attack. Our CS manager does it but doesn't have time to really focus on it. That alone would be another huge project."
@@ -246,7 +334,7 @@ footer .small{color:var(--textmid)}
   </div>
 
   <!-- P3 -->
-  <div class="pillar">
+  <div class="pillar" id="p3">
     <div class="pillar-head"><div class="pnum">Pillar 03</div><h3>Demand &amp; Inventory Intelligence</h3></div>
     <div class="psys">NetSuite · Planning · Working Capital</div>
     <div class="row"><div class="lbl">Failure</div><p class="val">Forecasting runs on spreadsheets and last year plus a percentage. Club-channel orders arrive lumpy and enormous; DTC is smooth and small; one forecast tries to serve both. The result is simultaneous overstock and stockout — cash frozen in slow SKUs while the hero SKU goes dark in Q4.</p></div>
@@ -257,7 +345,7 @@ footer .small{color:var(--textmid)}
   </div>
 
   <!-- P4 -->
-  <div class="pillar">
+  <div class="pillar" id="p4">
     <div class="pillar-head"><div class="pnum">Pillar 04</div><h3>Retail Compliance &amp; Deduction Defense</h3></div>
     <div class="psys">EDI · Club Channel · Costco &amp; Big-Box</div>
     <div class="row"><div class="lbl">Failure</div><p class="val">Chargebacks land as line items nobody owns. An ASN goes out late, a label fails inspection, a pallet is built wrong — and the penalty is netted off the remittance months later, unexamined. Finance books it as cost of doing business. Nobody traces it back to the process that caused it.</p></div>
@@ -269,7 +357,7 @@ footer .small{color:var(--textmid)}
   </div>
 
   <!-- P5 -->
-  <div class="pillar">
+  <div class="pillar" id="p5">
     <div class="pillar-head"><div class="pnum">Pillar 05</div><h3>Order-to-Cash and Procure-to-Pay</h3></div>
     <div class="psys">NetSuite · AP · AR · Finance Ops</div>
     <div class="row"><div class="lbl">Failure</div><p class="val">Invoices are keyed by hand, exceptions queue up behind one person, and early-payment discounts expire unclaimed. It is unglamorous and it is the most reliably fixable line in the business.</p></div>
@@ -280,7 +368,7 @@ footer .small{color:var(--textmid)}
   </div>
 
   <!-- P6 -->
-  <div class="pillar">
+  <div class="pillar" id="p6">
     <div class="pillar-head"><div class="pnum">Pillar 06</div><h3>Commercial Content &amp; Media Efficiency</h3></div>
     <div class="psys">DTC · Ecommerce · Brand</div>
     <div class="row"><div class="lbl">Failure</div><p class="val">Every SKU refresh triggers a full production cycle. Listing copy, A+ content, lifestyle imagery and video are rebuilt from scratch for each channel, each retailer template, each variant. Meanwhile paid media runs on manual campaign structures that leave measurable efficiency on the table.</p></div>
@@ -291,7 +379,7 @@ footer .small{color:var(--textmid)}
   </div>
 
   <!-- P7 -->
-  <div class="pillar">
+  <div class="pillar" id="p7">
     <div class="pillar-head"><div class="pnum">Pillar 07</div><h3>Capability, Governance and the Innovation Habit</h3></div>
     <div class="psys">People · Training · The Multiplier</div>
     <div class="row"><div class="lbl">Failure</div><p class="val">Tools get bought. Nobody is trained to be inventive with them, so usage collapses to whatever the vendor demoed. Six months later the license renews and no one can point to a number that moved. This is the pillar that decides whether the other six survive contact with reality.</p></div>
