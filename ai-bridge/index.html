@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI Bridge — 7-Pillar Improvement Plan | Jonathan C. Weisz</title>
+<meta name="description" content="A 7-pillar plan for consumer product companies running PDM, PLM, ERP and NetSuite without AI leverage. What it costs to stay where you are, modeled from sourced benchmarks — and what it takes to cross.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  --bg:#faf8f5;--card:#ffffff;--card2:#f5f0ea;
+  --text:#2c2418;--textlight:#6b5d4f;--textmid:#4a3f33;
+  --warm:#c8956c;--warmdeep:#a06b3f;--warmbg:rgba(200,149,108,.08);
+  --gold:#b8860b;
+  --green:#3d7a4a;--greenbg:rgba(61,122,74,.06);
+  --blue:#3b6b8a;--bluebg:rgba(59,107,138,.06);
+  --sky:#5a9ab5;
+  --rose:#9e5a5a;--rosebg:rgba(158,90,90,.06);
+  --red:#c0392b;--redbg:rgba(192,57,43,.06);
+  --border:rgba(44,36,24,.08);--borderdark:rgba(44,36,24,.15);
+  --radius:14px;
+  --shadow:0 2px 20px rgba(44,36,24,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Georgia','Times New Roman',serif;background:var(--bg);color:var(--text);line-height:1.8;-webkit-font-smoothing:antialiased}
+.sans{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.container{max-width:900px;margin:0 auto;padding:0 22px}
+a{color:var(--warmdeep);text-decoration:none;border-bottom:1px solid rgba(160,107,63,.25)}
+a:hover{border-bottom-color:var(--warmdeep)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:40;background:rgba(250,248,245,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:900px;margin:0 auto;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.nav a{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--textlight);border:none;font-weight:600}
+.nav a:hover{color:var(--warmdeep)}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap}
+
+/* hero */
+.hero{text-align:center;padding:76px 24px 54px;background:linear-gradient(180deg,#efe8dd 0%,var(--bg) 100%)}
+.eyebrow{font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--warm);font-family:-apple-system,sans-serif;font-weight:700;margin-bottom:18px}
+.hero h1{font-size:clamp(2.1rem,5.4vw,3.4rem);line-height:1.15;margin:0 0 20px;font-weight:400}
+.hero h1 em{font-style:italic;color:var(--warmdeep)}
+.hero p{max-width:640px;margin:0 auto;font-size:1.09rem;color:var(--textmid)}
+
+section{padding:54px 0}
+section.alt{background:var(--card2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);line-height:1.25;margin:0 0 8px;font-weight:400}
+h3{font-size:1.22rem;margin:0 0 8px;font-weight:400}
+.lede{color:var(--textlight);font-size:1.02rem;margin:0 0 28px}
+.kicker{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--warm);font-family:-apple-system,sans-serif;font-weight:700;margin-bottom:10px}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow);margin-bottom:18px}
+.card.flat{box-shadow:none;background:transparent}
+
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;text-align:center;box-shadow:var(--shadow)}
+.stat .n{font-size:1.85rem;color:var(--warmdeep);line-height:1.1}
+.stat .l{font-family:-apple-system,sans-serif;font-size:.76rem;line-height:1.45;color:var(--textlight);margin-top:8px}
+.stat .src{font-family:-apple-system,sans-serif;font-size:.66rem;color:#9c8f80;margin-top:7px;letter-spacing:.02em}
+
+/* pillars */
+.pillar{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--warm);border-radius:var(--radius);padding:26px 28px;margin-bottom:20px;box-shadow:var(--shadow)}
+.pillar-head{display:flex;gap:16px;align-items:baseline;margin-bottom:6px}
+.pnum{font-family:-apple-system,sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.14em;color:var(--warm);white-space:nowrap;padding-top:4px}
+.pillar h3{margin:0}
+.psys{font-family:-apple-system,sans-serif;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--textlight);background:var(--warmbg);border:1px solid rgba(200,149,108,.22);padding:3px 10px;border-radius:20px;display:inline-block;margin:8px 0 14px}
+.row{display:grid;grid-template-columns:112px 1fr;gap:6px 18px;font-size:.97rem;margin-top:14px}
+.row .lbl{font-family:-apple-system,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);font-weight:700;padding-top:6px}
+.row .val{margin:0}
+.money{background:var(--greenbg);border:1px solid rgba(61,122,74,.2);border-radius:10px;padding:14px 18px;margin-top:18px;font-family:-apple-system,sans-serif;font-size:.95rem}
+.money strong{color:var(--green);font-size:1.16rem}
+.money .assume{display:block;font-size:.79rem;color:var(--textlight);margin-top:6px;line-height:1.55}
+
+/* quote */
+.quote{background:var(--bluebg);border-left:3px solid var(--sky);border-radius:0 10px 10px 0;padding:20px 24px;margin:20px 0;font-size:1.05rem;font-style:italic;color:var(--textmid)}
+.quote .who{display:block;font-style:normal;font-family:-apple-system,sans-serif;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sky);margin-top:12px;font-weight:700}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:.9rem;margin-top:6px}
+th{text-align:left;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);font-weight:700;padding:10px 12px;border-bottom:1.5px solid var(--borderdark)}
+td{padding:12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}
+td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.total td{border-top:1.5px solid var(--borderdark);border-bottom:none;font-weight:700;padding-top:14px}
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* callouts */
+.warn{background:var(--redbg);border:1px solid rgba(192,57,43,.18);border-radius:var(--radius);padding:24px 26px;margin-bottom:18px}
+.warn h3{color:var(--red)}
+.honest{background:#fffdf7;border:1px solid rgba(184,134,11,.28);border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow)}
+.honest h3{color:var(--gold)}
+ul.tight{margin:12px 0 0;padding-left:20px}
+ul.tight li{margin-bottom:9px}
+ol.tight{margin:12px 0 0;padding-left:20px}
+ol.tight li{margin-bottom:9px}
+.small{font-family:-apple-system,sans-serif;font-size:.84rem;color:var(--textlight);line-height:1.65}
+.sources{font-family:-apple-system,sans-serif;font-size:.79rem;color:var(--textlight);line-height:1.75}
+.sources li{margin-bottom:7px}
+footer{background:#efe8dd;border-top:1px solid var(--border);padding:42px 0 52px;text-align:center}
+footer .small{color:var(--textmid)}
+.cta{display:inline-block;background:var(--warmdeep);color:#fff;font-family:-apple-system,sans-serif;font-weight:600;font-size:.92rem;letter-spacing:.03em;padding:14px 30px;border-radius:30px;border:none;margin-top:8px}
+.cta:hover{background:#8d5c33;color:#fff}
+@media(max-width:640px){
+  .row{grid-template-columns:1fr;gap:2px}
+  .row .lbl{padding-top:12px}
+  .pillar-head{flex-direction:column;gap:2px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="../">← Jonathan Weisz</a>
+    <div class="nav-links">
+      <a href="#gap">The Gap</a>
+      <a href="#pillars">7 Pillars</a>
+      <a href="#math">The Math</a>
+      <a href="#engage">Engage</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="container">
+    <div class="eyebrow">Fractional Strategic Consulting</div>
+    <h1>The systems already hold the answer.<br><em>Nobody has time to ask them.</em></h1>
+    <p>A 7-pillar improvement plan for consumer product companies running PDM, PLM, ERP and NetSuite without AI leverage — what the gap costs each year, modeled from sourced benchmarks, and what it takes to cross it.</p>
+  </div>
+</div>
+
+<!-- ===== THE GAP ===== -->
+<section id="gap">
+<div class="container">
+  <div class="kicker">The Bridge</div>
+  <h2>Almost everyone has bought AI. Almost nobody has crossed.</h2>
+  <p class="lede">This is the single most misread number in the market. Adoption is near-universal. Operationalization is nearly non-existent. The distance between those two facts is the entire opportunity.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">88%</div><div class="l">of organizations use AI in at least one business function</div><div class="src">McKinsey, 2025 · n=1,993</div></div>
+    <div class="stat"><div class="n">~33%</div><div class="l">have begun scaling it across the enterprise</div><div class="src">McKinsey, 2025</div></div>
+    <div class="stat"><div class="n">39%</div><div class="l">report any enterprise-level EBIT impact</div><div class="src">McKinsey, 2025</div></div>
+    <div class="stat"><div class="n">14%</div><div class="l">define P&amp;L impact for all their AI initiatives</div><div class="src">BCG, 2026 · n=152 CEOs</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Where mid-market manufacturers actually sit</h3>
+    <p>BCG's July 2026 survey of 152 CEOs at companies above $500M found <strong>89% seeing cost or revenue benefit in targeted areas</strong> — but only <strong>26% embedding AI into broader business transformation</strong>, and <strong>65% still running pilots</strong>. Roughly <strong>5%</strong> have reached transformative bottom-line impact at scale.</p>
+    <p>In the middle market the split is sharper. RSM's March 2026 survey (n=129 manufacturers) found <strong>88% with AI at least partially integrated but only 32% fully integrated</strong> across core operations. A separate Kaufman Rossin study of mid-sized manufacturers found <strong>none fully operationalized</strong>, with 73% still in early preparation stages — a small sample, so read it as direction rather than fact.</p>
+    <p class="small" style="margin-top:16px"><strong>The honest read:</strong> the market is not split into adopters and holdouts. It is splitting into <em>a third who have wired AI into how the business actually runs</em> and two-thirds who bought licenses. Being in the second group is not a technology problem. It is a systems, data and training problem — which is exactly the problem this plan solves.</p>
+  </div>
+
+  <div class="warn">
+    <h3>Why the pilots stall</h3>
+    <p>MIT's NANDA initiative reported in 2025 that <strong>95% of generative-AI pilots produced no measurable P&amp;L impact</strong>, and that AI sourced from specialist partners succeeded roughly twice as often as AI built in-house (~67% vs ~33%).</p>
+    <p class="small"><strong>Handle this number carefully.</strong> It is the most-quoted AI statistic in existence and also the most-attacked — the methodology was widely criticized and the paper was never peer-reviewed. I cite it because BCG's independent finding explains it: 89% of executives claim benefits while only 14% define P&amp;L impact. The failure isn't the model. It's that nobody defined what winning looked like, wired it to a number, or trained anyone to run it.</p>
+  </div>
+</div>
+</section>
+
+<!-- ===== THE COMPANY ===== -->
+<section class="alt">
+<div class="container">
+  <div class="kicker">The Archetype</div>
+  <h2>A consumer fitness brand, Costco and direct</h2>
+  <p class="lede">Every figure on this page is modeled against one profile. Swap in real numbers during discovery and the model re-runs — the structure holds.</p>
+
+  <div class="card">
+    <div class="tblwrap">
+    <table>
+      <tr><td><strong>Revenue</strong></td><td class="n">$80M</td><td>Consumer fitness equipment and accessories</td></tr>
+      <tr><td><strong>Channel mix</strong></td><td class="n">60 / 40</td><td>Club &amp; big-box (Costco et al.) / direct-to-consumer</td></tr>
+      <tr><td><strong>COGS</strong></td><td class="n">$48M</td><td>60% of revenue</td></tr>
+      <tr><td><strong>Average inventory</strong></td><td class="n">$14M</td><td>~3.5 turns</td></tr>
+      <tr><td><strong>Engineering</strong></td><td class="n">8 FTE</td><td>Mechanical / design, 2,000 hrs each</td></tr>
+      <tr><td><strong>Loaded eng. cost</strong></td><td class="n">$70/hr</td><td>BLS OEWS median + BLS ECEC 1.43× benefit load. Excludes overhead — this is the floor</td></tr>
+      <tr><td><strong>AP volume</strong></td><td class="n">18,000/yr</td><td>Supplier invoices</td></tr>
+      <tr><td><strong>Customer contacts</strong></td><td class="n">30,000/yr</td><td>Support tickets, warranty and parts requests</td></tr>
+      <tr><td><strong>DTC media spend</strong></td><td class="n">$3.2M</td><td>10% of DTC revenue</td></tr>
+      <tr><td><strong>Content production</strong></td><td class="n">$500K</td><td>Product photography, video, listing assets</td></tr>
+      <tr><td><strong>Systems</strong></td><td class="n">—</td><td>SOLIDWORKS PDM or entry PLM · NetSuite ERP · EDI to club channel · Shopify or similar DTC</td></tr>
+    </table>
+    </div>
+  </div>
+  <p class="small">These are assumptions, stated openly so you can argue with them. That is the point. A business case you cannot audit is a brochure.</p>
+</div>
+</section>
+
+<!-- ===== PILLARS ===== -->
+<section id="pillars">
+<div class="container">
+  <div class="kicker">The Plan</div>
+  <h2>Seven pillars</h2>
+  <p class="lede">Each pillar names the failure mode, the intervention, the evidence behind it, and the modeled dollar effect. Where the evidence does not exist, it says so.</p>
+
+  <!-- P1 -->
+  <div class="pillar">
+    <div class="pillar-head"><div class="pnum">Pillar 01</div><h3>The Product Data Spine</h3></div>
+    <div class="psys">PDM · PLM · SOLIDWORKS · Engineering</div>
+    <div class="row"><div class="lbl">Failure</div><p class="val">Engineers cannot find what already exists, so they rebuild it. Revisions live in three places. The BOM the factory builds from and the BOM engineering thinks is current are not the same document. Every change is a manual chase.</p></div>
+    <div class="row"><div class="lbl">Evidence</div><p class="val">Tech-Clarity's 2024 study (n=245) found engineers lose <strong>19% of their time — one full day a week</strong> — to non-value-added data management, with only about half of engineering time going to actual design. Their earlier breakdown attributes the largest slices to <strong>searching for information (23%)</strong> and <strong>recreating data that couldn't be found (12%)</strong>, with <strong>20% of time spent working from outdated information</strong>.</p></div>
+    <div class="row"><div class="lbl">Intervention</div><p class="val">Clean the spine before layering intelligence on it. Enforced revision control, one authoritative BOM, structured part attributes and a real reuse taxonomy. Then AI-assisted retrieval over the corrected library — semantic part search, spec drafting, change-impact summaries.</p></div>
+    <div class="money"><strong>$213,000/yr</strong> of engineering payroll is currently consumed by data friction — 3,040 hours across 8 engineers. A one-third recovery returns <strong>~$71,000/yr and ~1,000 engineering hours</strong> to actual product work.
+    <span class="assume">Assumes 8 FTE × 2,000 hrs × 19% (Tech-Clarity 2024) × $70/hr loaded. The one-third recovery rate is a target I will commit to, not a published benchmark.</span></div>
+  </div>
+
+  <!-- P2 -->
+  <div class="pillar">
+    <div class="pillar-head"><div class="pnum">Pillar 02</div><h3>The Quality Signal Loop</h3></div>
+    <div class="psys">Customer Service → Engineering · The Bridge</div>
+    <div class="quote">"Maybe you could also help with building better quality data reports from AI to see our product issues and know what things to attack. Our CS manager does it but doesn't have time to really focus on it. That alone would be another huge project."
+    <span class="who">— From an operator conversation</span></div>
+    <div class="row"><div class="lbl">Failure</div><p class="val">The company already owns the most valuable product-quality dataset it will ever have: every support ticket, warranty claim, return reason, parts request and review. It sits in a helpdesk, unread at scale, because one manager cannot hand-read 30,000 contacts a year. The defect signal exists. Nobody has time to hear it.</p></div>
+    <div class="row"><div class="lbl">Why it's the bridge</div><p class="val">This is the pillar that connects the two halves of the business. CS text is the only continuous, unfiltered feedback loop from the field back to engineering. Classify it, cluster it, tie it to SKU, lot, revision and channel — and the ERP's warranty cost lines, the PLM's change queue and the DTC review score all start pointing at the same root cause. Without it, PDM and ERP are two systems that never speak.</p></div>
+    <div class="row"><div class="lbl">Intervention</div><p class="val">A standing pipeline: auto-classify every contact into failure taxonomy, cluster emerging issues, rank by units affected × warranty cost × review damage, and push a weekly one-page "what to attack" report to engineering and quality. The CS manager stops being the bottleneck and becomes the reviewer. Deflection of routine contacts is the second-order benefit, not the headline.</p></div>
+    <div class="money"><strong>~$88,000/yr</strong> in support cost, plus the defect-detection window shortening from quarters to weeks. Modeled at 45% AI resolution of 30,000 contacts, at $6.50 saved per resolved contact.
+    <span class="assume">Cost per human contact $6–12 and per AI resolution $0.99–2.00 are Intercom/Fin.ai figures — a vendor with a product to sell. Independent testing puts resolution rates at 45–53% against Intercom's claimed 76%, so this models 45%, not 76%. The larger value — catching a defect in week 3 instead of month 7 — is real but I will not put a fabricated number on it.</span></div>
+  </div>
+
+  <!-- P3 -->
+  <div class="pillar">
+    <div class="pillar-head"><div class="pnum">Pillar 03</div><h3>Demand &amp; Inventory Intelligence</h3></div>
+    <div class="psys">NetSuite · Planning · Working Capital</div>
+    <div class="row"><div class="lbl">Failure</div><p class="val">Forecasting runs on spreadsheets and last year plus a percentage. Club-channel orders arrive lumpy and enormous; DTC is smooth and small; one forecast tries to serve both. The result is simultaneous overstock and stockout — cash frozen in slow SKUs while the hero SKU goes dark in Q4.</p></div>
+    <div class="row"><div class="lbl">Evidence</div><p class="val">McKinsey's 2024 CPG transformation work documents a named case at <strong>+13% forecast accuracy, −40% product shortages and −35% inventory</strong>. e2open's 2024 benchmark study (network data 2019–2023) found demand sensing cut forecast error by <strong>about a third</strong>, and reported that <strong>85% of items are slow movers</strong> — precisely the population where statistical baselines degrade worst.</p></div>
+    <div class="row"><div class="lbl">Intervention</div><p class="val">Separate the two demand signals. Feed the club channel from POS and program calendars; feed DTC from its own velocity and media plan. NetSuite Predictive Planning and multivariate forecasting where they fit; a purpose-built model where they don't. Then attack the obsolescence tail, which is the largest single component of carrying cost for a model-year product.</p></div>
+    <div class="money"><strong>~$525,000/yr</strong> in carrying cost avoided, plus <strong>~$2.1M of working capital released</strong> one time. Modeled at a 15% inventory reduction on $14M, at a 25% annual carrying cost.
+    <span class="assume">Deliberately conservative: 15%, not McKinsey's 35%. The 20–30% carrying-cost benchmark is the standard planning assumption but traces to Richardson (1995) — everyone recycles it, including NetSuite's own documentation. Treat it as a convention, not fresh research.</span></div>
+  </div>
+
+  <!-- P4 -->
+  <div class="pillar">
+    <div class="pillar-head"><div class="pnum">Pillar 04</div><h3>Retail Compliance &amp; Deduction Defense</h3></div>
+    <div class="psys">EDI · Club Channel · Costco &amp; Big-Box</div>
+    <div class="row"><div class="lbl">Failure</div><p class="val">Chargebacks land as line items nobody owns. An ASN goes out late, a label fails inspection, a pallet is built wrong — and the penalty is netted off the remittance months later, unexamined. Finance books it as cost of doing business. Nobody traces it back to the process that caused it.</p></div>
+    <div class="row"><div class="lbl">Evidence</div><p class="val">The published fee schedules are unambiguous. <strong>Walmart</strong> enforces <strong>98% OTIF with a 3% of COGS penalty</strong> on non-compliant orders. <strong>Target's</strong> revised policy (effective Aug 2024) charges <strong>5% of COGS with a $150 minimum</strong> on on-time fill rate failures, and <strong>3% of COGS</strong> for ASN violations. Walmart's SQEP program adds flat fees — <strong>$200 per defective PO plus $1 per case</strong> for document inaccuracies.</p></div>
+    <div class="row"><div class="lbl">On Costco specifically</div><p class="val"><strong>Costco publishes no OTIF threshold and no standardized penalty percentage.</strong> Chargebacks are assessed case-by-case per violation, and their EDI specifications are proprietary and diverge from industry standard — with the 856 ASN the critical transaction. Any Costco chargeback figure you have been quoted is unsourced, because the source does not exist publicly. What is defensible is the process discipline, not a benchmark number.</p></div>
+    <div class="row"><div class="lbl">Intervention</div><p class="val">Instrument the EDI stack so every 850 → 856 → 810 cycle is monitored, not just transmitted. Auto-validate ASNs before send. Then run deduction forensics: classify every chargeback by root cause, auto-draft dispute packets for the invalid ones, and route the valid ones back to the operational process that caused them.</p></div>
+    <div class="money"><strong>$100,000–$290,000/yr</strong> recovered or prevented on $48M of club-channel volume.
+    <span class="assume">This is the softest number on the page. Practitioner estimates (Jon Allen, Woodridge Retail Group, 2026) put deduction leak at 5–15% of gross sales with 10–20% invalid and another 20% preventable-but-unchallenged; SPS Commerce reports only 20–30% of deductions are ever disputed, with a 40% win-back rate on those that are. None of this is an audited industry benchmark — it is two practitioner sources, one of them a vendor. I model a 2% deduction rate and recover 10–30% of it. Your actual remittance detail replaces this range in week one.</span></div>
+  </div>
+
+  <!-- P5 -->
+  <div class="pillar">
+    <div class="pillar-head"><div class="pnum">Pillar 05</div><h3>Order-to-Cash and Procure-to-Pay</h3></div>
+    <div class="psys">NetSuite · AP · AR · Finance Ops</div>
+    <div class="row"><div class="lbl">Failure</div><p class="val">Invoices are keyed by hand, exceptions queue up behind one person, and early-payment discounts expire unclaimed. It is unglamorous and it is the most reliably fixable line in the business.</p></div>
+    <div class="row"><div class="lbl">Evidence</div><p class="val">Ardent Partners' <em>State of ePayables 2025</em> (n=204, data collected March–May 2025) is the strongest dataset on this page: average cost to process one invoice <strong>$9.84</strong> against a best-in-class <strong>$2.65</strong>; average processing time <strong>8.2 days</strong> versus <strong>2.9</strong>; exception rate <strong>18.4%</strong> versus <strong>11.1%</strong>. AP staff spend <strong>21.9% of their time</strong> answering supplier inquiries. <strong>44%</strong> of AP teams already use AI, with another 34% planning to inside twelve months.</p></div>
+    <div class="row"><div class="lbl">Intervention</div><p class="val">NetSuite Bill Capture plus document intelligence for extraction; exception triage routed by predicted cause rather than by queue order; a supplier-inquiry assistant against live AP data. Target the middle of the Ardent range, not best-in-class — a $4.50 cost per invoice is achievable without a transformation program.</p></div>
+    <div class="money"><strong>~$96,000/yr</strong> on 18,000 invoices, moving from the $9.84 average toward $4.50 per invoice. Additional upside in early-payment discount capture at roughly 2% of invoice value where terms allow.
+    <span class="assume">Ardent is an independent analyst firm with a disclosed sample and a multi-year series; the report is sponsor-supported but the benchmark predates any single sponsor. This is the most defensible figure in the plan.</span></div>
+  </div>
+
+  <!-- P6 -->
+  <div class="pillar">
+    <div class="pillar-head"><div class="pnum">Pillar 06</div><h3>Commercial Content &amp; Media Efficiency</h3></div>
+    <div class="psys">DTC · Ecommerce · Brand</div>
+    <div class="row"><div class="lbl">Failure</div><p class="val">Every SKU refresh triggers a full production cycle. Listing copy, A+ content, lifestyle imagery and video are rebuilt from scratch for each channel, each retailer template, each variant. Meanwhile paid media runs on manual campaign structures that leave measurable efficiency on the table.</p></div>
+    <div class="row"><div class="lbl">Evidence</div><p class="val">Unilever reported in 2025 that AI and digital-twin product shoots made content <strong>roughly 50% cheaper and 2× faster</strong> company-wide, with one business unit at <strong>−55% cost and 65% faster turnaround</strong>. Meta disclosed in its Q3 2025 earnings call that Advantage+ lead campaigns delivered <strong>14% lower cost per lead</strong> on average, with $60B annualized revenue running through its end-to-end AI ad tools.</p></div>
+    <div class="row"><div class="lbl">Intervention</div><p class="val">Build a product-content pipeline off the PDM spine from Pillar 01 — spec data flows into listing copy, variant matrices and retailer templates automatically instead of being retyped. Digital-twin imagery for variant and colorway shots. Restructure paid media around automated campaign types with clean conversion signal.</p></div>
+    <div class="money"><strong>~$470,000/yr</strong> — roughly $320,000 from a 10% efficiency gain on $3.2M of DTC media, and $150,000 from a 30% reduction on $500K of content production.
+    <span class="assume">Both source figures are self-reported by parties with an interest: Unilever is publicizing agency savings, Meta is measuring its own ad products. I therefore model 10% media efficiency against Meta's claimed 14%, and 30% content savings against Unilever's claimed 50%. Efficiency gains in auction-based media also partly get bid away — Meta's own price per ad rose 10% year over year.</span></div>
+  </div>
+
+  <!-- P7 -->
+  <div class="pillar">
+    <div class="pillar-head"><div class="pnum">Pillar 07</div><h3>Capability, Governance and the Innovation Habit</h3></div>
+    <div class="psys">People · Training · The Multiplier</div>
+    <div class="row"><div class="lbl">Failure</div><p class="val">Tools get bought. Nobody is trained to be inventive with them, so usage collapses to whatever the vendor demoed. Six months later the license renews and no one can point to a number that moved. This is the pillar that decides whether the other six survive contact with reality.</p></div>
+    <div class="row"><div class="lbl">Evidence</div><p class="val">BCG's 2026 CEO survey found <strong>65% of companies still running pilots</strong> and only <strong>14% defining P&amp;L impact</strong> for all AI initiatives — with more than half naming the missing AI-to-P&amp;L link as a top barrier. MIT NANDA's finding that externally-partnered AI succeeded roughly twice as often as internally-built AI points the same direction: the constraint is operating discipline, not model capability.</p></div>
+    <div class="row"><div class="lbl">Intervention</div><p class="val">Every pillar ships with a named owner, a baseline measurement taken before anything changes, and a single metric wired to the P&amp;L. Working sessions with the people who do the job — the CS manager, the planner, the AP lead, the design engineer — building prompts and workflows against their own live data, not a training sandbox. The deliverable is a team that keeps finding the next one after I leave.</p></div>
+    <div class="money"><strong>The multiplier on the other six.</strong> Not a separate savings line — the difference between capturing the model and joining the 65% still piloting.
+    <span class="assume">I will not attach a fabricated dollar figure to training ROI. There is no credible benchmark for it and anyone who quotes you one is selling something.</span></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== THE MATH ===== -->
+<section class="alt" id="math">
+<div class="container">
+  <div class="kicker">The Scoreboard</div>
+  <h2>What the gap costs, per year</h2>
+
+  <div class="card">
+    <div class="tblwrap">
+    <table>
+      <thead><tr><th>Pillar</th><th>Mechanism</th><th style="text-align:right">Annual</th><th style="text-align:right">Confidence</th></tr></thead>
+      <tbody>
+        <tr><td><strong>01</strong> Product Data Spine</td><td>Engineering hours recovered from data friction</td><td class="n">$71,000</td><td class="n">Med-High</td></tr>
+        <tr><td><strong>02</strong> Quality Signal Loop</td><td>Support cost + defect detection speed</td><td class="n">$88,000</td><td class="n">Medium</td></tr>
+        <tr><td><strong>03</strong> Demand &amp; Inventory</td><td>Carrying cost avoided on 15% inventory reduction</td><td class="n">$525,000</td><td class="n">Medium</td></tr>
+        <tr><td><strong>04</strong> Retail Compliance</td><td>Deductions recovered and prevented</td><td class="n">$100–290,000</td><td class="n">Low</td></tr>
+        <tr><td><strong>05</strong> Order-to-Cash / AP</td><td>Invoice processing cost reduction</td><td class="n">$96,000</td><td class="n">High</td></tr>
+        <tr><td><strong>06</strong> Content &amp; Media</td><td>Production and paid-media efficiency</td><td class="n">$470,000</td><td class="n">Medium</td></tr>
+        <tr><td><strong>07</strong> Capability</td><td>Multiplier — determines whether 01–06 hold</td><td class="n">—</td><td class="n">—</td></tr>
+        <tr class="total"><td>Recurring, annual</td><td>Using the low end of Pillar 04</td><td class="n">~$1,350,000</td><td class="n"></td></tr>
+        <tr class="total"><td>One-time</td><td>Working capital released from inventory</td><td class="n">~$2,100,000</td><td class="n"></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">$114K</div><div class="l">annual cost of the engagement at $9,500/month</div></div>
+    <div class="stat"><div class="n">8.5%</div><div class="l">of the modeled value needed to break even</div></div>
+    <div class="stat"><div class="n">$4.04M</div><div class="l">recurring value forgone over three years of standing still</div></div>
+    <div class="stat"><div class="n">1.7%</div><div class="l">of revenue — what the modeled gap represents annually</div></div>
+  </div>
+
+  <div class="card">
+    <h3>The cost of not moving</h3>
+    <p>The number that matters is not the upside. It is that <strong>the leak is already running.</strong> Every one of these losses is being paid right now, monthly, out of margin — booked as payroll, as carrying cost, as remittance deductions, as agency invoices. Nothing needs to go wrong for the money to disappear. It disappears by default.</p>
+    <p>Three years of standing still costs roughly <strong>$4.04M in recurring value</strong>, plus the working capital that stays frozen, plus a widening capability gap against the 32% of manufacturers who already have AI fully integrated into core operations. And the pilot tax is real: money spent on tools nobody was trained to use is spent either way — the only question is whether it produces a number.</p>
+    <p class="small" style="margin-top:16px">To be precise about what this claim is: this is a model, not a measurement. The benchmarks are sourced and cited. The assumptions are stated. The arithmetic is auditable. What it is not is a promise — the first thirty days of any engagement exist to replace these assumptions with your actual numbers, and the model may well come down.</p>
+  </div>
+</div>
+</section>
+
+<!-- ===== HONESTY ===== -->
+<section>
+<div class="container">
+  <div class="kicker">Diligence</div>
+  <h2>What I will not tell you</h2>
+  <p class="lede">A consultant who has never met a number they couldn't find is a consultant who is inventing them. Here is everything I went looking for and could not source.</p>
+
+  <div class="honest">
+    <ul class="tight">
+      <li><strong>Any quantified AI improvement in PLM or PDM.</strong> Part reuse, BOM accuracy, design search speed, engineering change cycle time, spec generation — there is no independent, methodologically disclosed study. An independent PLM analyst review in November 2025 found vendors stating benefits <em>qualitatively only</em>, with zero substantiated percentage improvements. If someone quotes you "AI improved part reuse by 40%," ask for the methodology. There isn't one.</li>
+      <li><strong>The average cost of an engineering change order.</strong> APQC maintains formal benchmarks for both ECO cost and ECO cycle time, but both are behind membership paywalls. Every dollar-per-ECO figure circulating publicly traces to vendor marketing with no underlying study. This one is purchasable if it becomes load-bearing.</li>
+      <li><strong>The cost of an EDI error.</strong> No defensible figure exists. What is defensible is the published retailer fee schedule — Walmart's $200 per PO plus $1 per case for a bad ASN is a real, citable number. The generic "EDI errors cost $X" is not.</li>
+      <li><strong>Costco's chargeback schedule or OTIF threshold.</strong> Costco publishes neither. Any number you have been given is unsourced.</li>
+      <li><strong>Quantified AI outcomes from NetSuite customers.</strong> I searched the product pages, the 2025.2 release notes and SuiteWorld 2025 press materials. There is one qualitative testimonial and no percentages. Also note: NetSuite Next, the agentic platform announced October 2025, was North-America-only "within the next twelve months" — verify current availability before planning around it.</li>
+      <li><strong>AI-driven return-rate reduction for durable goods.</strong> Every claim traces to vendor blogs, and the underlying research is apparel-sizing work that does not transfer to fitness equipment, where returns are driven by transit damage, assembly difficulty and buyer's remorse.</li>
+      <li><strong>Any credible ROI benchmark for AI training itself.</strong> Doesn't exist. Pillar 07 carries no dollar figure for exactly that reason.</li>
+    </ul>
+    <p class="small" style="margin-top:20px">This section is here because it is the fastest way to tell the difference between a business case and a sales deck. The numbers on this page are worth what they are worth <em>because</em> this list exists.</p>
+  </div>
+</div>
+</section>
+
+<!-- ===== ENGAGEMENT ===== -->
+<section class="alt" id="engage">
+<div class="container">
+  <div class="kicker">How it runs</div>
+  <h2>Ninety days, sprint-based</h2>
+
+  <div class="card">
+    <h3>The shape</h3>
+    <ol class="tight">
+      <li><strong>Days 1–15 — Baseline.</strong> Pull real numbers: remittance detail, AP volume and cost, inventory and turns by SKU class, engineering time survey, twelve months of CS contacts. Every assumption above gets replaced or confirmed. Deliverable: the same model, populated with your data.</li>
+      <li><strong>Days 16–30 — Sequence.</strong> Rank the seven pillars by value ÷ effort against what we found. Some will collapse. One or two will be bigger than modeled. Pick the two that ship first.</li>
+      <li><strong>Days 31–75 — Build.</strong> Working sprints on the top pillars, with the operators who own them. Shipped artifacts, not recommendations — the weekly quality report actually running, the ASN validation actually firing, the deduction dispute packets actually going out.</li>
+      <li><strong>Days 76–90 — Measure and hand off.</strong> Before-and-after against the day-15 baseline. Owners named. Runbooks written. Mutual evaluation on scope and rate for what comes next.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Why this profile fits this problem</h3>
+    <p>Mechanical engineer by training — <strong>3,000+ hours in SOLIDWORKS</strong>, one of 32 SOLIDWORKS Certified Experts in Minnesota, <strong>3,500+ technical support cases</strong> and <strong>100+ engineers trained</strong> as an application engineer. Product development at a consumer fitness manufacturer, including co-designing an industry-first seated elliptical. Then engineering management, then building and shipping <strong>eleven production web products across seven industries</strong> in a single year using AI tooling end to end.</p>
+    <p>That combination is the point. Most fractional consultants bring strategy or domain depth, not both, and almost none can build. The PDM side of this plan is not theoretical to me — I lived in that system, trained the people who used it, and watched exactly how the data spine breaks. The AI side is not theoretical either; it is what I ship with daily.</p>
+    <p class="small" style="margin-top:14px"><strong>Rate:</strong> $9,500/month, 90-day initial term, value-based rather than hourly. Covers up to three defined business lines. Either party may exit with 14 days' written notice after day 30. All work product transfers to the client on payment.</p>
+  </div>
+
+  <div style="text-align:center;margin-top:34px">
+    <a class="cta" href="mailto:jcw.agent1@gmail.com?subject=AI%20Bridge%20—%207-Pillar%20Plan">Start with the baseline conversation</a>
+  </div>
+</div>
+</section>
+
+<!-- ===== SOURCES ===== -->
+<section>
+<div class="container">
+  <div class="kicker">Citations</div>
+  <h2>Sources</h2>
+  <ol class="sources">
+    <li>McKinsey &amp; Company — <a href="https://www.mckinsey.com/capabilities/operations/our-insights/the-state-of-ai">The state of AI in 2025</a> (n=1,993, Nov 2025)</li>
+    <li>Boston Consulting Group — <a href="https://www.bcg.com/press/22july2026-ceos-cost-revenue-benefits-ai-struggling-scale">CEOs Are Starting to See Value from AI</a> (n=152 CEOs, Jul 2026)</li>
+    <li>RSM US — <a href="https://rsmus.com/insights/industries/manufacturing/manufacturers-using-ai-2026.html">Manufacturers using AI, 2026</a> (n=129 manufacturers, Mar 2026)</li>
+    <li>Kaufman Rossin — <a href="https://kaufmanrossin.com/state-of-ai-in-middle-market">The State of AI in the Middle Market</a> (n=100, 2026) — small sample, directional</li>
+    <li>MIT NANDA — <em>The GenAI Divide: State of AI in Business 2025</em>, <a href="https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/">via Fortune</a> — not peer-reviewed, methodology contested</li>
+    <li>Tech-Clarity — <a href="https://tech-clarity.com/design-data-management/20859">Effective Design Data Management and Collaboration</a> (n=245, Nov 2024) and the earlier <a href="https://tech-clarity.com/documents/Tech-Clarity-Perspective-DDAa.pdf">Reducing Non-Value Added Work in Engineering</a> (2014, for composition only)</li>
+    <li>Beyond PLM (Oleg Shilovitsky) — <a href="https://beyondplm.com/2025/11/23/ai-in-plm-what-are-vendors-really-delivering-what-did-i-learn-and-is-the-hard-problem-still-unsolved/">AI in PLM: what are vendors really delivering?</a> (Nov 2025)</li>
+    <li>Ardent Partners — <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/">The State of ePayables 2025</a> (n=204, data Mar–May 2025)</li>
+    <li>McKinsey &amp; Company — <a href="https://www.mckinsey.com/industries/consumer-packaged-goods/our-insights/fortune-or-fiction-the-real-value-of-a-digital-and-ai-transformation-in-cpg">Fortune or fiction? The real value of a digital and AI transformation in CPG</a> (Oct 2024)</li>
+    <li>e2open — <a href="https://www.businesswire.com/news/home/20241002486322/en">2024 Forecasting and Inventory Benchmark Study</a> (network data 2019–2023) — vendor study</li>
+    <li>Lokad, citing Richardson (1995) — <a href="https://www.lokad.com/definition-inventory-costs/">Inventory carrying costs</a>; corroborated by <a href="https://www.netsuite.com/portal/resource/articles/inventory-management/inventory-carrying-costs.shtml">Oracle NetSuite</a></li>
+    <li>Zipline Logistics — <a href="https://ziplinelogistics.com/blog/walmart-otif-98-percent/">Walmart 98% OTIF</a>; corroborated by <a href="https://www.supplychaindive.com/news/walmart-on-time-in-full-87-suppliers/550083/">Supply Chain Dive</a></li>
+    <li>Distribution Alternatives — <a href="https://www.daserv.com/target-vendor-compliance-guide/">Target vendor compliance guide</a> (policy effective Aug 2024)</li>
+    <li>Productiv — <a href="https://getproductiv.com/costco-vendor-compliance">Costco vendor compliance</a> (source for the absence of published Costco thresholds)</li>
+    <li>Woodridge Retail Group / Jon Allen — <a href="https://talkbusiness.net/2026/01/the-supply-side-retailer-chargebacks-could-hurt-margins-for-vendors/">via Talk Business &amp; Politics</a> (Jan 2026) — single practitioner, not an industry benchmark</li>
+    <li>SPS Commerce — <a href="https://www.spscommerce.com/community/articles/the-impact-of-retailer-deductions">The impact of retailer deductions</a> — vendor, undated, no methodology</li>
+    <li>Intercom / Fin.ai — <a href="https://fin.ai/learn/roi-ai-customer-service-agents-benchmarks">AI customer service benchmarks</a> — vendor marketing; third-party testing reports materially lower resolution rates</li>
+    <li>National Retail Federation + Happy Returns — <a href="https://nrf.com/media-center/press-releases/consumers-expected-to-return-nearly-850-billion-in-merchandise-in-2025">2025 returns data</a></li>
+    <li>Unilever — <a href="https://www.unilever.com/news/press-and-media/press-releases/2025/unilever-reinvents-product-shoots-with-digital-twins-and-ai/">Digital twins and AI product shoots</a> (Mar 2025) — self-reported</li>
+    <li>Meta Platforms — <a href="https://www.fool.com/earnings/call-transcripts/2025/10/29/meta-platforms-meta-q3-2025-earnings-call-transcript/">Q3 2025 earnings call</a> — company's own measurement of its own ad products</li>
+    <li>Oracle NetSuite — <a href="https://www.netsuite.com/portal/products/artificial-intelligence-ai.shtml">AI product page</a> and <a href="https://www.prnewswire.com/news-releases/netsuite-unveils-netsuite-next-302577216.html">NetSuite Next announcement</a> (Oct 2025)</li>
+    <li>US Bureau of Labor Statistics — <a href="https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineers.htm">OOH, Mechanical Engineers</a> and <a href="https://www.bls.gov/news.release/ecec.nr0.htm">Employer Costs for Employee Compensation</a> (Mar 2026)</li>
+  </ol>
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    <p class="small" style="max-width:620px;margin:0 auto 18px">Every figure on this page is either cited to a named source or labeled as a modeled assumption. Where the evidence does not exist, the page says so rather than filling the gap.</p>
+    <p class="small"><a href="../">Jonathan C. Weisz</a> &nbsp;·&nbsp; Fractional Strategic Consultant &nbsp;·&nbsp; <a href="mailto:jcw.agent1@gmail.com">jcw.agent1@gmail.com</a></p>
+    <p class="small" style="color:#9c8f80;margin-top:14px">Modeled August 2026. Benchmarks current as of publication.</p>
+  </div>
+</footer>
+
+</body>
+</html>
