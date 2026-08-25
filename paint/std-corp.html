@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>customSTDs — STD Corp · Custom Paint &amp; Airbrush</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primer:#A8A29A;
+  --primer-dk:#8E8880;
+  --booth:#17161A;
+  --hazard:#F0C400;
+  --oxide:#8C3A16;
+  --chalk:#EDEAE4;
+  --rule:rgba(23,22,26,.22);
+  --display:"Archivo Black",Impact,sans-serif;
+  --body:"Barlow Condensed",system-ui,sans-serif;
+  --spec:"Space Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--primer);color:var(--booth);
+  font-family:var(--body);font-size:18px;line-height:1.5;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:var(--oxide)}
+:focus-visible{outline:3px solid var(--oxide);outline-offset:2px}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+
+/* overspray texture */
+.grit{
+  position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.32;
+  background-image:
+    radial-gradient(circle at 18% 30%, rgba(23,22,26,.20) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 72% 12%, rgba(23,22,26,.14) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 44% 82%, rgba(23,22,26,.12) 0 1px, transparent 1.5px);
+  background-size:120px 120px,170px 170px,210px 210px;
+}
+
+/* ---------- hazard bar ---------- */
+.hazard{
+  position:sticky;top:0;z-index:60;
+  border-bottom:3px solid var(--booth);
+  background:repeating-linear-gradient(135deg,var(--hazard) 0 22px,var(--booth) 22px 44px);
+  padding:0;
+}
+.hazard .inner{
+  background:var(--booth);margin:7px 4vw;padding:7px 14px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font-family:var(--spec);font-size:11px;letter-spacing:.08em;color:var(--primer);
+}
+.hazard .inner .stamp{color:var(--hazard)}
+.flip{margin-left:auto;display:flex;border:1px solid var(--primer-dk)}
+.flip button{font-family:var(--spec);font-size:11px;letter-spacing:.08em;background:transparent;color:var(--primer);border:0;padding:5px 12px;cursor:pointer}
+.flip button[aria-pressed="true"]{background:var(--hazard);color:var(--booth);font-weight:700}
+
+/* ---------- notice ---------- */
+.notice{
+  position:relative;z-index:1;margin:24px auto 0;
+  border:2px dashed var(--booth);padding:14px 18px;
+  font-family:var(--spec);font-size:12px;line-height:1.7;background:rgba(240,196,0,.22);
+}
+.notice b{font-family:var(--spec)}
+
+/* ---------- hero ---------- */
+header.hero{position:relative;z-index:1;padding:56px 0 40px}
+.stencil{
+  font-family:var(--spec);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:#5C5850;margin:0 0 20px;
+}
+.wordmark{margin:0;line-height:.84}
+.wordmark .lower{
+  display:block;font-family:var(--body);font-weight:700;
+  font-size:clamp(30px,5.6vw,62px);letter-spacing:.02em;text-transform:lowercase;color:#5C5850;
+}
+.wordmark .main{
+  display:block;font-family:var(--display);
+  font-size:clamp(56px,13vw,166px);letter-spacing:-.035em;text-transform:uppercase;
+  color:var(--booth);
+}
+.wordmark .main span{color:var(--oxide)}
+.lede{max-width:44ch;margin:26px 0 0;font-size:22px;color:#3A3630}
+.lede b{color:var(--booth)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  display:inline-block;font-family:var(--spec);font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;padding:13px 24px;border:2px solid var(--booth);cursor:pointer;
+}
+.btn-solid{background:var(--booth);color:var(--hazard);font-weight:700}
+.btn-solid:hover{background:var(--oxide);color:var(--chalk)}
+.btn-ghost{background:transparent;color:var(--booth)}
+.btn-ghost:hover{background:var(--booth);color:var(--hazard)}
+
+/* ---------- sections ---------- */
+section{position:relative;z-index:1;padding:60px 0}
+.sechead{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;border-bottom:3px solid var(--booth);padding-bottom:10px;margin-bottom:28px}
+.sechead h2{font-family:var(--display);font-size:clamp(28px,4.4vw,46px);text-transform:uppercase;margin:0;letter-spacing:-.02em;line-height:1}
+.sechead .sub{font-family:var(--spec);font-size:11px;letter-spacing:.14em;color:#5C5850;margin-left:auto}
+
+/* ---------- contact sheet ---------- */
+.sheet{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.frame{background:var(--booth);padding:8px 8px 0;text-decoration:none;display:block;transition:background .3s}
+.frame:hover{background:var(--oxide)}
+.frame img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.frame .strip{
+  display:flex;justify-content:space-between;gap:8px;padding:7px 2px 8px;
+  font-family:var(--spec);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+}
+.frame .strip .no{color:var(--hazard);font-weight:700}
+.frame .strip .nm{color:var(--primer);text-align:right}
+
+/* ---------- job log ---------- */
+.log{width:100%;border-collapse:collapse;font-family:var(--body);font-size:17px}
+.log caption{text-align:left;font-family:var(--spec);font-size:11px;letter-spacing:.14em;color:#5C5850;padding-bottom:10px}
+.log th{
+  font-family:var(--spec);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  text-align:left;padding:8px 10px;border-bottom:2px solid var(--booth);color:#3A3630;font-weight:400;
+}
+.log td{padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.log tr:hover td{background:rgba(240,196,0,.20)}
+.log td.thumb{width:88px;padding:6px 10px 6px 0}
+.log td.thumb img{width:80px;height:60px;object-fit:cover;border:2px solid var(--booth)}
+.log td.subj{font-weight:600;font-size:19px}
+.log td.cat{font-family:var(--spec);font-size:11px;letter-spacing:.06em;color:#4A463E}
+.log td.open a{font-family:var(--spec);font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--oxide)}
+
+/* ---------- takes ---------- */
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:var(--booth)}
+.takes div{background:var(--primer);padding:20px 16px;font-family:var(--display);font-size:20px;text-transform:uppercase;line-height:1.1;letter-spacing:-.01em}
+.takes div:last-child{color:var(--oxide)}
+
+/* ---------- order ---------- */
+.order{border:3px solid var(--booth);background:var(--chalk);padding:0}
+.order .ohead{
+  background:var(--booth);color:var(--hazard);
+  font-family:var(--spec);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:9px 18px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.order .obody{padding:26px 18px 30px;display:flex;gap:28px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.order p{margin:0;max-width:42ch;font-size:19px}
+
+footer{position:relative;z-index:1;border-top:3px solid var(--booth);margin-top:30px;padding:24px 0 56px;font-family:var(--spec);font-size:11px;letter-spacing:.06em;color:#4A463E}
+
+/* ================================================================
+   2004 CAPTURE
+   ================================================================ */
+body.y2004{
+  background:#000;background-image:none;
+  color:#0F0;font-family:"Courier New",monospace;font-size:15px;
+}
+body.y2004 .grit{display:none}
+body.y2004 .wrap{width:min(760px,94vw);background:#000;border:2px solid #0F0;padding:0 16px}
+body.y2004 .hazard{background:#000;border-bottom:2px solid #0F0}
+body.y2004 .hazard .inner{background:#000;color:#0F0;border:1px solid #0F0}
+body.y2004 .hazard .inner .stamp{color:#FF0}
+body.y2004 .flip{border-color:#0F0}
+body.y2004 .flip button{color:#0F0}
+body.y2004 .flip button[aria-pressed="true"]{background:#0F0;color:#000}
+
+body.y2004 .notice{border:1px solid #0F0;background:#000;color:#FF0}
+body.y2004 header.hero{padding:18px 0 12px;text-align:center}
+body.y2004 .stencil{color:#0F0;letter-spacing:.1em;font-size:12px;margin-bottom:8px}
+body.y2004 .stencil::before{content:"<< "}
+body.y2004 .stencil::after{content:" >>"}
+body.y2004 .wordmark .lower{font-family:"Courier New",monospace;color:#0F0;font-size:clamp(18px,4vw,30px);text-transform:lowercase}
+body.y2004 .wordmark .main{font-family:"Courier New",monospace;font-weight:700;color:#0F0;font-size:clamp(34px,8.5vw,60px);letter-spacing:.06em;text-shadow:0 0 8px #0F0}
+body.y2004 .wordmark .main span{color:#FF0}
+body.y2004 .lede{color:#0F0;font-family:"Courier New",monospace;font-size:14px;max-width:none;margin:12px auto 0}
+body.y2004 .lede b{color:#FF0}
+body.y2004 .cta{justify-content:center;margin-top:14px}
+body.y2004 .btn{border:1px solid #0F0;background:#000;color:#0F0;font-size:13px;padding:5px 12px;letter-spacing:0}
+body.y2004 .btn-solid{background:#0F0;color:#000}
+body.y2004 .btn:hover{background:#FF0;color:#000;border-color:#FF0}
+
+body.y2004 section{padding:14px 0}
+body.y2004 .sechead{border-bottom:1px solid #0F0;padding-bottom:4px;margin-bottom:12px;display:block}
+body.y2004 .sechead h2{font-family:"Courier New",monospace;font-size:20px;color:#FF0;letter-spacing:.04em}
+body.y2004 .sechead h2::before{content:"[ "}
+body.y2004 .sechead h2::after{content:" ]"}
+body.y2004 .sechead .sub{color:#0A0;font-size:11px;margin-left:0;display:block}
+
+body.y2004 .sheet{grid-template-columns:repeat(3,1fr);gap:6px}
+body.y2004 .frame{background:#000;border:1px solid #0F0;padding:3px 3px 0}
+body.y2004 .frame:hover{background:#000;border-color:#FF0}
+body.y2004 .frame .strip{font-size:9px;padding:3px 1px 4px}
+body.y2004 .frame .strip .no{color:#FF0}
+body.y2004 .frame .strip .nm{color:#0F0}
+
+body.y2004 .log{font-family:"Courier New",monospace;font-size:13px}
+body.y2004 .log caption{color:#0A0}
+body.y2004 .log th{color:#FF0;border-bottom:1px solid #0F0}
+body.y2004 .log td{border-bottom:1px dotted #0A0;color:#0F0}
+body.y2004 .log tr:hover td{background:#001800}
+body.y2004 .log td.thumb img{border:1px solid #0F0;width:56px;height:42px}
+body.y2004 .log td.subj{font-size:13px;font-weight:400}
+body.y2004 .log td.cat{color:#0A0;font-size:11px}
+body.y2004 .log td.open a{color:#FF0;border-bottom:1px solid #FF0}
+
+body.y2004 .takes{display:block;background:#000}
+body.y2004 .takes div{background:#000;color:#0F0;font-family:"Courier New",monospace;font-size:14px;text-transform:none;padding:2px 0}
+body.y2004 .takes div::before{content:"> "}
+body.y2004 .takes div:last-child{color:#FF0}
+
+body.y2004 .order{border:1px solid #0F0;background:#000}
+body.y2004 .order .ohead{background:#000;color:#FF0;border-bottom:1px solid #0F0;font-size:12px}
+body.y2004 .order .obody{display:block;padding:12px 10px 16px}
+body.y2004 .order p{color:#0F0;font-family:"Courier New",monospace;font-size:14px;max-width:none;margin-bottom:12px}
+
+body.y2004 footer{border-top:1px solid #0F0;color:#0A0;text-align:center;padding:12px 0 28px}
+.counter{display:none}
+body.y2004 .counter{display:inline-block;border:1px solid #0F0;color:#FF0;padding:2px 8px;letter-spacing:.24em;margin-top:8px}
+
+@media (max-width:700px){
+  .log td.cat{display:none}
+  .log th:nth-child(3){display:none}
+  body.y2004 .sheet{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="grit" aria-hidden="true"></div>
+
+<div class="hazard">
+  <div class="inner">
+    <span>customstds.com</span>
+    <span class="stamp" id="stamp">rebuilt · concept</span>
+    <div class="flip" role="group" aria-label="Site era">
+      <button id="btn2004" aria-pressed="false">2004 capture</button>
+      <button id="btnNow" aria-pressed="true">Today</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="notice">
+    <b>Body copy below is authentic</b> — recovered from the customSTDs.com capture of 6&nbsp;Feb&nbsp;2004 in the Internet Archive. The <i>STD Corp as trade counter</i> framing is still a concept: the real page under that name was a photo log of the shop's headquarters build-out, not a commercial page. Job log categories remain provisional.
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="stencil">Booth · bench · bare shell · North Dakota</p>
+    <h1 class="wordmark">
+      <span class="lower">custom</span>
+      <span class="main">STD<span>&nbsp;CORP</span></span>
+    </h1>
+    <p class="lede">Look to customSTDs.com for all your custom helmet painting, custom airbrushing, and custom motorcycle airbrushing needs. customSTDs.com specializes in custom painted helmets and street bike tank and fender painting. <b>We custom paint all brands of helmets — Shoei, Arai, HJC, Bell — and all brands of street bikes. You name it, we can personalize it for YOU.</b></p>
+    <div class="cta">
+      <a class="btn btn-solid" href="#order">Open a job</a>
+      <a class="btn btn-ghost" href="#sheet">Contact sheet</a>
+    </div>
+  </div>
+</header>
+
+<section id="sheet">
+  <div class="wrap">
+    <div class="sechead">
+      <h2>Contact sheet</h2>
+      <span class="sub">archive numbers as filed</span>
+    </div>
+    <div class="sheet">
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/japanese-samurai">
+        <img src="img/topnine/000001_top_roll_0.jpg" alt="Japanese samurai custom painted helmet" loading="lazy">
+        <span class="strip"><span class="no">000001</span><span class="nm">Samurai</span></span>
+      </a>
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/omann-flash">
+        <img src="img/topnine/000002_top_roll.jpg" alt="Omann Flash custom painted helmet" loading="lazy">
+        <span class="strip"><span class="no">000002</span><span class="nm">Omann Flash</span></span>
+      </a>
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/bud-light">
+        <img src="img/topnine/000003_top_roll.jpg" alt="Bud Light custom painted helmet" loading="lazy">
+        <span class="strip"><span class="no">000003</span><span class="nm">Bud Light</span></span>
+      </a>
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/raiders">
+        <img src="img/topnine/000005_top_roll.jpg" alt="Raiders themed custom painted helmet" loading="lazy">
+        <span class="strip"><span class="no">000005</span><span class="nm">Raiders</span></span>
+      </a>
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/japanese-shi">
+        <img src="img/topnine/000006_top_roll.jpg" alt="Japanese Shi custom painted helmet" loading="lazy">
+        <span class="strip"><span class="no">000006</span><span class="nm">Shi</span></span>
+      </a>
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/tattered-usa-flag">
+        <img src="img/topnine/000007_top_roll.jpg" alt="Tattered USA flag custom painted helmet" loading="lazy">
+        <span class="strip"><span class="no">000007</span><span class="nm">Tattered Flag</span></span>
+      </a>
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/evilangel-navy-seal-pinups">
+        <img src="img/topnine/000008_top_roll.jpg" alt="Navy SEAL pinup custom painted helmet" loading="lazy">
+        <span class="strip"><span class="no">000008</span><span class="nm">SEAL Pinups</span></span>
+      </a>
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/traffic-kingz">
+        <img src="img/topnine/000009_top_roll.jpg" alt="Traffic Kingz custom painted helmet" loading="lazy">
+        <span class="strip"><span class="no">000009</span><span class="nm">Traffic Kingz</span></span>
+      </a>
+      <a class="frame" href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/transworld-magazine-donn-maeda-geisha-girl">
+        <img src="img/topnine/000085_top_roll.jpg" alt="Geisha girl helmet featured in Transworld Magazine" loading="lazy">
+        <span class="strip"><span class="no">000085</span><span class="nm">Geisha · Transworld</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="log">
+  <div class="wrap">
+    <div class="sechead">
+      <h2>Job log</h2>
+      <span class="sub">selected · out of the booth</span>
+    </div>
+    <table class="log">
+      <caption>Placeholder categories — real classifications pending.</caption>
+      <thead>
+        <tr><th colspan="2">Subject</th><th>Category</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/62986452-132D-45EB-A602-5A5C91226862.jpg" alt="Haiden Deegan custom painted helmet" loading="lazy"></td>
+          <td class="subj">Haiden "Dangerboy" Deegan</td>
+          <td class="cat">Race program · helmet</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/haiden-dangerboy-deegan-helmet">Open</a></td>
+        </tr>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/Haiden%20Deegan%20shoes%20thumbnailFOR%20website.jpg" alt="Custom painted Jordan 1s for Haiden Deegan" loading="lazy"></td>
+          <td class="subj">Deegan Jordan 1s · Arlington SX</td>
+          <td class="cat">Non-standard substrate</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/haiden-deegans-custom-jordans">Open</a></td>
+        </tr>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/Hailie-1024x683.jpg" alt="Hailie Deegan custom painted helmet" loading="lazy"></td>
+          <td class="subj">Hailie Deegan</td>
+          <td class="cat">Race program · helmet</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/hailie-deegan-helmet">Open</a></td>
+        </tr>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/Alise%20Willoughby%20Olympic%20helmet%201%20little.jpg" alt="Alise Willoughby Olympic BMX helmet" loading="lazy"></td>
+          <td class="subj">Alise Willoughby · Tokyo</td>
+          <td class="cat">Federation · Team USA</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/alise-willoughby-olympic-helmet-2021-tokyo">Open</a></td>
+        </tr>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/KISS%20custom%20helmet%201%20_0.jpg" alt="KISS fighter pilot helmets" loading="lazy"></td>
+          <td class="subj">Gene Simmons &amp; Paul Stanley</td>
+          <td class="cat">Commission · pair</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/kiss-custom-fighter-pilot-helmets-gene-simmons-paul-stanley">Open</a></td>
+        </tr>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/LanceHelmet45.jpg" alt="Lance Armstrong custom painted cycling helmet" loading="lazy"></td>
+          <td class="subj">Lance Armstrong</td>
+          <td class="cat">Cycling · helmet</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/lance-armstrong-helmet">Open</a></td>
+        </tr>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/Marvin%20Harrison%20Jr%20sm1.jpg" alt="Marvin Harrison Jr Ohio State ski helmet" loading="lazy"></td>
+          <td class="subj">Marvin Harrison Jr. · draft day</td>
+          <td class="cat">Ski / snow · helmet</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/marvin-harrison-ohio-state-buckeyes-ski-snow-helmet">Open</a></td>
+        </tr>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/000206_alt_1.jpg" alt="Legends racing 1911 cases" loading="lazy"></td>
+          <td class="subj">Carmichael · Hart · Henry · Boz</td>
+          <td class="cat">Series · 1911 cases</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/carmichael-hart-legends-racing-1911-cases">Open</a></td>
+        </tr>
+        <tr>
+          <td class="thumb"><img src="img/famous-lids/darius-rucker.jpg" alt="Darius Rucker custom painted golf driver" loading="lazy"></td>
+          <td class="subj">Darius Rucker · golf driver</td>
+          <td class="cat">Non-standard substrate</td>
+          <td class="open"><a href="https://dbcustoms.staytheway.com/?q=custom-helmet-painting/darius-rucker-dolphins-driver">Open</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="takes">
+  <div class="wrap">
+    <div class="sechead">
+      <h2>What we take</h2>
+      <span class="sub">if it holds paint</span>
+    </div>
+    <div class="takes">
+      <div>Motorcycle helmets</div>
+      <div>Motocross helmets</div>
+      <div>BMX helmets</div>
+      <div>Paintball masks</div>
+      <div>Street bikes</div>
+      <div>Cruisers</div>
+      <div>Choppers</div>
+      <div>Everything else</div>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="wrap">
+    <div class="order">
+      <div class="ohead"><span>Work order</span><span>STD Corp</span></div>
+      <div class="obody">
+        <p>Send the shell, the quantity, and the date you need it back. Team and fleet work quoted per unit.</p>
+        <a class="btn btn-solid" href="mailto:schtev@dbcustoms.com">schtev@dbcustoms.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>customSTDs · STD Corp · trade side of DBcustoms</div>
+    <div class="counter">VISITOR 004871</div>
+    <div style="margin-top:10px">Concept rebuild. Photos archived locally from dbcustoms.staytheway.com. Body copy recovered from the customSTDs.com capture of 6 Feb 2004.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var b2004=document.getElementById('btn2004'),bNow=document.getElementById('btnNow'),st=document.getElementById('stamp');
+  function setEra(old){
+    document.body.classList.toggle('y2004',old);
+    b2004.setAttribute('aria-pressed',String(old));
+    bNow.setAttribute('aria-pressed',String(!old));
+    st.textContent = old ? 'snapshot · 14 Mar 2004' : 'rebuilt · concept';
+  }
+  b2004.addEventListener('click',function(){setEra(true);});
+  bNow.addEventListener('click',function(){setEra(false);});
+})();
+</script>
+</body>
+</html>

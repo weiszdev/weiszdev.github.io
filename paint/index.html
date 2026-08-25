@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>customSTDs — Concept Builds</title>
+<style>
+  :root{
+    --ground:#111010;
+    --panel:#1A1918;
+    --line:#2E2C2A;
+    --ink:#EDE9E4;
+    --ink-soft:#9A938B;
+    --accent:#C0392B;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:56px 24px 80px}
+  header{border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:34px}
+  h1{font-size:30px;margin:0 0 6px;letter-spacing:-.01em;font-weight:600}
+  .sub{color:var(--ink-soft);font-size:15px;margin:0}
+  .flag{
+    display:inline-block;margin-top:18px;padding:7px 13px;border:1px solid var(--accent);
+    border-radius:4px;color:var(--accent);font-size:12.5px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+  .grid{display:grid;gap:18px}
+  @media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+  a.card{
+    display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s;
+  }
+  a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  a.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .thumb{display:block;width:100%;height:190px;object-fit:cover;background:#000;border-bottom:1px solid var(--line)}
+  .meta{padding:18px 20px}
+  .meta h2{font-size:18px;margin:0 0 5px;font-weight:600}
+  .meta p{margin:0;color:var(--ink-soft);font-size:14px;line-height:1.5}
+  footer{margin-top:42px;padding-top:24px;border-top:1px solid var(--line);
+         color:var(--ink-soft);font-size:13.5px;line-height:1.7}
+  footer b{color:var(--ink);font-weight:600}
+  code{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>customSTDs — Concept Builds</h1>
+    <p class="sub">Direction studies for the DBcustoms / customSTDs rebrand. Images are archived locally, not hotlinked.</p>
+    <span class="flag">Internal review · work in progress</span>
+  </header>
+
+  <div class="grid">
+
+    <a class="card" href="concept-dark.html">
+      <img class="thumb" src="img/topnine/000001_top_roll_0.jpg" alt="Airbrushed custom helmet from the shop portfolio">
+      <div class="meta">
+        <h2>Concept — Dark</h2>
+        <p>DBcustoms rebuild. Portfolio-forward layout with the 2004 capture toggle.</p>
+      </div>
+    </a>
+
+    <a class="card" href="std-corp.html">
+      <img class="thumb" src="img/topnine/000006_top_roll.jpg" alt="Custom painted helmet from the shop portfolio">
+      <div class="meta">
+        <h2>STD Corp</h2>
+        <p>customSTDs corporate-page study. Period-accurate treatment.</p>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    <b>Two of five planned pages.</b> The original landing page, <code>stripped.html</code> and
+    <code>sketch.html</code> were not available when this was assembled — this index is a stand-in
+    and should be replaced when the real one turns up.<br><br>
+    Copy on these pages is not final. Some body text and contact details are placeholders.
+    Portfolio work shown was commissioned one-off; it is not offered as current marketing.
+  </footer>
+
+</div>
+</body>
+</html>
