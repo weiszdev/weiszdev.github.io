@@ -149,76 +149,76 @@ footer{position:relative;z-index:1;border-top:3px solid var(--booth);margin-top:
 /* ================================================================
    2004 CAPTURE
    ================================================================ */
+
+.orig04{display:none}
+.orig04-note{background:#111;color:#888;font-size:11px;padding:7px 12px;border-bottom:1px solid #222;text-align:center}
+.orig04-note a{color:#FF0000}
+.orig04-mast{padding:10px 12px 12px;text-align:center}
+.orig04-mast img{margin:0 auto;max-width:820px;width:100%;height:auto;display:block;border:0}
+.orig04-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0 0 14px;border-bottom:1px solid #2a2a2a}
+.orig04-nav img{max-height:34px;width:auto;display:block;border:0}
+.orig04-logo{padding:16px 0 4px;text-align:center}
+.orig04-logo img{margin:0 auto;max-height:120px;width:auto;display:block;border:0}
+.orig04-foot{padding:26px 0 34px;text-align:center;border-top:1px solid #2a2a2a;margin-top:30px}
+.orig04-cards{margin:0 auto 12px;max-height:26px;width:auto;display:block;border:0}
+.orig04-textnav{font-size:12px;color:#777;line-height:2}
+.orig04-textnav a{color:#FF0000}
+.orig04-wordmark{margin:14px auto 0;max-height:38px;width:auto;display:block;border:0}
+
+/* ---- 2004 capture: matched to the real customSTDs.com, not a pastiche.
+   The original was FrontPage: bgcolor #000000, Arial, link #FF0000,
+   text-align center, _borders image nav. ---- */
 body.y2004{
-  background:#000;background-image:none;
-  color:#0F0;font-family:"Courier New",monospace;font-size:15px;
+  background:#000;background-image:none;color:#e8e8e8;
+  font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;text-align:center;
 }
 body.y2004 .grit{display:none}
-body.y2004 .wrap{width:min(760px,94vw);background:#000;border:2px solid #0F0;padding:0 16px}
-body.y2004 .hazard{background:#000;border-bottom:2px solid #0F0}
-body.y2004 .hazard .inner{background:#000;color:#0F0;border:1px solid #0F0}
-body.y2004 .hazard .inner .stamp{color:#FF0}
-body.y2004 .flip{border-color:#0F0}
-body.y2004 .flip button{color:#0F0}
-body.y2004 .flip button[aria-pressed="true"]{background:#0F0;color:#000}
-
-body.y2004 .notice{border:1px solid #0F0;background:#000;color:#FF0}
-body.y2004 header.hero{padding:18px 0 12px;text-align:center}
-body.y2004 .stencil{color:#0F0;letter-spacing:.1em;font-size:12px;margin-bottom:8px}
-body.y2004 .stencil::before{content:"<< "}
-body.y2004 .stencil::after{content:" >>"}
-body.y2004 .wordmark .lower{font-family:"Courier New",monospace;color:#0F0;font-size:clamp(18px,4vw,30px);text-transform:lowercase}
-body.y2004 .wordmark .main{font-family:"Courier New",monospace;font-weight:700;color:#0F0;font-size:clamp(34px,8.5vw,60px);letter-spacing:.06em;text-shadow:0 0 8px #0F0}
-body.y2004 .wordmark .main span{color:#FF0}
-body.y2004 .lede{color:#0F0;font-family:"Courier New",monospace;font-size:14px;max-width:none;margin:12px auto 0}
-body.y2004 .lede b{color:#FF0}
-body.y2004 .cta{justify-content:center;margin-top:14px}
-body.y2004 .btn{border:1px solid #0F0;background:#000;color:#0F0;font-size:13px;padding:5px 12px;letter-spacing:0}
-body.y2004 .btn-solid{background:#0F0;color:#000}
-body.y2004 .btn:hover{background:#FF0;color:#000;border-color:#FF0}
-
-body.y2004 section{padding:14px 0}
-body.y2004 .sechead{border-bottom:1px solid #0F0;padding-bottom:4px;margin-bottom:12px;display:block}
-body.y2004 .sechead h2{font-family:"Courier New",monospace;font-size:20px;color:#FF0;letter-spacing:.04em}
-body.y2004 .sechead h2::before{content:"[ "}
-body.y2004 .sechead h2::after{content:" ]"}
-body.y2004 .sechead .sub{color:#0A0;font-size:11px;margin-left:0;display:block}
-
-body.y2004 .sheet{grid-template-columns:repeat(3,1fr);gap:6px}
-body.y2004 .frame{background:#000;border:1px solid #0F0;padding:3px 3px 0}
-body.y2004 .frame:hover{background:#000;border-color:#FF0}
-body.y2004 .frame .strip{font-size:9px;padding:3px 1px 4px}
-body.y2004 .frame .strip .no{color:#FF0}
-body.y2004 .frame .strip .nm{color:#0F0}
-
-body.y2004 .log{font-family:"Courier New",monospace;font-size:13px}
-body.y2004 .log caption{color:#0A0}
-body.y2004 .log th{color:#FF0;border-bottom:1px solid #0F0}
-body.y2004 .log td{border-bottom:1px dotted #0A0;color:#0F0}
-body.y2004 .log tr:hover td{background:#001800}
-body.y2004 .log td.thumb img{border:1px solid #0F0;width:56px;height:42px}
-body.y2004 .log td.subj{font-size:13px;font-weight:400}
-body.y2004 .log td.cat{color:#0A0;font-size:11px}
-body.y2004 .log td.open a{color:#FF0;border-bottom:1px solid #FF0}
-
-body.y2004 .takes{display:block;background:#000}
-body.y2004 .takes div{background:#000;color:#0F0;font-family:"Courier New",monospace;font-size:14px;text-transform:none;padding:2px 0}
-body.y2004 .takes div::before{content:"> "}
-body.y2004 .takes div:last-child{color:#FF0}
-
-body.y2004 .order{border:1px solid #0F0;background:#000}
-body.y2004 .order .ohead{background:#000;color:#FF0;border-bottom:1px solid #0F0;font-size:12px}
-body.y2004 .order .obody{display:block;padding:12px 10px 16px}
-body.y2004 .order p{color:#0F0;font-family:"Courier New",monospace;font-size:14px;max-width:none;margin-bottom:12px}
-
-body.y2004 footer{border-top:1px solid #0F0;color:#0A0;text-align:center;padding:12px 0 28px}
-.counter{display:none}
-body.y2004 .counter{display:inline-block;border:1px solid #0F0;color:#FF0;padding:2px 8px;letter-spacing:.24em;margin-top:8px}
-
-@media (max-width:700px){
-  .log td.cat{display:none}
-  .log th:nth-child(3){display:none}
-  body.y2004 .sheet{grid-template-columns:1fr 1fr}
+body.y2004 a{color:#FF0000;text-decoration:none}
+body.y2004 a:hover{color:#fff}
+body.y2004 .orig04{display:block}
+body.y2004 .hazard{background:#000;border-bottom:1px solid #222;background-image:none}
+body.y2004 .hazard .inner{background:#000;color:#777;border:0;font-size:11px}
+body.y2004 .hazard .inner .stamp{color:#777}
+body.y2004 .flip{border:1px solid #333}
+body.y2004 .flip button{color:#aaa;background:#000;font-family:Arial,Helvetica,sans-serif}
+body.y2004 .flip button[aria-pressed="true"]{background:#FF0000;color:#fff}
+body.y2004 .wrap{width:min(900px,94vw);background:#000;border:0;padding:0}
+body.y2004 .notice{
+  border:1px solid #2a2a2a;background:#111;color:#888;font-size:11px;
+  text-align:left;border-radius:0;
+}
+body.y2004 header.hero{padding:6px 0 14px;text-align:center;border:0}
+body.y2004 .stencil{
+  color:#888;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;
+}
+body.y2004 .hero h1, body.y2004 h1{
+  font-family:Arial,Helvetica,sans-serif;font-size:26px;font-weight:bold;color:#fff;
+  letter-spacing:.5px;text-transform:uppercase;line-height:1.25;margin:0 0 8px;
+}
+body.y2004 .hero h1 span, body.y2004 .hero h1 em{color:#FF0000;font-style:normal}
+body.y2004 .lede{
+  color:#e8e8e8;font-size:14px;line-height:1.6;text-align:left;max-width:none;font-weight:normal;
+}
+body.y2004 h2{
+  color:#FF0000;font-size:15px;font-weight:bold;text-transform:uppercase;
+  letter-spacing:.5px;text-align:left;margin:22px 0 6px;
+}
+body.y2004 .sub, body.y2004 .note{color:#888;font-size:12px;text-align:left}
+body.y2004 .btn{
+  display:inline-block;border:1px solid #FF0000;background:#000;color:#FF0000;
+  border-radius:0;padding:7px 14px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+}
+body.y2004 .btn:hover{background:#FF0000;color:#fff}
+body.y2004 .btn-solid{background:#FF0000;color:#fff}
+body.y2004 table, body.y2004 .sheet, body.y2004 .joblog{
+  border:1px solid #2a2a2a;background:#050505;text-align:left;
+}
+body.y2004 td, body.y2004 th{border-color:#2a2a2a;color:#ddd;font-size:13px}
+body.y2004 th{color:#FF0000;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+body.y2004 footer{border-top:1px solid #2a2a2a;color:#777;font-size:12px;text-align:center}
+@media(max-width:720px){
+  body.y2004 .wrap{width:96vw}
+}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
@@ -228,6 +228,24 @@ body.y2004 .counter{display:inline-block;border:1px solid #0F0;color:#FF0;paddin
 </head>
 <body>
 <div class="grit" aria-hidden="true"></div>
+
+
+<div class="orig04">
+  <div class="orig04-note">Snapshot styling reproduced from the customSTDs.com captures. The copy on this page is a concept &mdash; <a href="customstds.com/stdcorps.html">see the faithful STD Corps rebuild</a>.</div>
+  <div class="orig04-mast">
+    <img src="customstds.com/assets/_borders/WebHeading82.jpg" alt="Custom Helmet Painting and Airbrushing">
+  </div>
+  <div class="orig04-nav">
+    <a href="customstds.com/index.html"><img src="customstds.com/assets/_borders/HomeButton.jpg" alt="Home"></a>
+    <a href="customstds.com/customhelmets.html"><img src="customstds.com/assets/_borders/customhelmetsbutton.jpg" alt="Custom Helmets"></a>
+    <a href="customstds.com/bikes.html"><img src="customstds.com/assets/_borders/bikesbutton.jpg" alt="Bikes"></a>
+    <a href="customstds.com/clothing.html"><img src="customstds.com/assets/_borders/clothingbutton.jpg" alt="STD Gear"></a>
+    <a href="customstds.com/pricing.html"><img src="customstds.com/assets/_borders/PricingButton.jpg" alt="Pricing"></a>
+    <a href="customstds.com/definition.html"><img src="customstds.com/assets/_borders/definitionbutton1.jpg" alt="Definition"></a>
+    <a href="customstds.com/contact.html"><img src="customstds.com/assets/_borders/ContactButton.jpg" alt="Contact"></a>
+  </div>
+  <div class="orig04-logo"><img src="customstds.com/assets/corps/STDcorpsLogo.jpg" alt="STD Corps"></div>
+</div>
 
 <div class="hazard">
   <div class="inner">
@@ -431,5 +449,20 @@ body.y2004 .counter{display:inline-block;border:1px solid #0F0;color:#FF0;paddin
   bNow.addEventListener('click',function(){setEra(false);});
 })();
 </script>
+
+<div class="orig04 orig04-foot">
+  <img class="orig04-cards" src="customstds.com/assets/_borders/visa_mastercard_logo.gif" alt="Visa and MasterCard accepted">
+  <div class="orig04-textnav">
+    <a href="customstds.com/customhelmets.html">custom helmets</a> /
+    <a href="customstds.com/clothing.html">STD gear, clothing</a> /
+    <a href="customstds.com/bikes.html">bikes</a> /
+    <a href="customstds.com/pricing.html">pricing</a> /
+    <a href="customstds.com/definition.html">definition</a> /
+    <a href="customstds.com/stdcorps.html">STD corps</a> /
+    <a href="customstds.com/contact.html">contact</a>
+  </div>
+  <img class="orig04-wordmark" src="customstds.com/assets/_borders/customSTDs.com_small1.jpg" alt="customSTDs.com">
+</div>
+
 </body>
 </html>
