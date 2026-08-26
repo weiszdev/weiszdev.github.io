@@ -25,12 +25,11 @@ Tagline used sitewide: **Custom Helmet Painting and Airbrushing**
 
 ## Contact details — as filed in 2003–2004
 
-**Withheld from this public file on purpose.** They are 20+ years old and very
-likely reassigned to unrelated people. The full numbers are stored locally at
-`~/customsstd-private/recovered-contact-details.md`, outside this repo.
+**Confirmed current and legitimate** — same owner as dbcustoms.com. 701.226.2553 is already
+published across the rebuilt pages.
 
-- Phone: 701.223.XXXX  *(digits withheld — see local file)*
-- Cell: 701.226.XXXX  *(digits withheld — see local file)*
+- Phone: 701.223.4888
+- Cell: 701.226.2553
 - "info: customSTDs.com"
 
 Sources: `Contactpage.htm` (10 Aug 2003), `definition.htm` (8 Jun 2003)
