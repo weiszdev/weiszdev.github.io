@@ -9,7 +9,7 @@ logo inlays already assigned to filament 2.
 Coordinates: "use" orientation, tray bottom at z=0, centred on x/y.
 x = long direction (short sides / ends at +-x), y = depth (long sides at +-y).
 """
-import math, os, uuid, zipfile
+import json, math, os, uuid, zipfile
 import numpy as np
 import manifold3d as m3d
 import trimesh
@@ -80,6 +80,10 @@ LOCK_CLEAR   = 0.25
 DETENT_PROUD = 0.5
 
 UNDER_H = OPEN_H + CATCH + 0.2          # half-height behind the lips
+
+# ---- colours -----------------------------------------------------------------
+BODY_COLOR   = "#161616"   # black
+LOGO_COLOR   = "#9A9A9A"   # gray
 
 # ---- logo inlay --------------------------------------------------------------
 INLAY        = 0.8         # 4 layers @ 0.2
@@ -522,13 +526,24 @@ def write_bambu_3mf(path, objects):
         '<Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/>'
         '<Default Extension="png" ContentType="image/png"/>'
         '<Default Extension="config" ContentType="text/xml"/></Types>')
+    # filament slots: 1 = black body, 2 = gray logo inlay; X1C, 0.2 mm layers
+    files["Metadata/project_settings.config"] = json.dumps({
+        "printer_model": "Bambu Lab X1 Carbon",
+        "filament_colour": [BODY_COLOR, LOGO_COLOR],
+        "filament_type": ["PLA", "PLA"],
+        "layer_height": "0.2",
+        "initial_layer_print_height": "0.2",
+        "wall_loops": "3",
+        "sparse_infill_density": "15%",
+        "enable_support": "0",
+    }, indent=4)
     files["Metadata/model_settings.config"] = (
         '<?xml version="1.0" encoding="UTF-8"?>\n<config>\n' + "".join(cfg) +
         '  <plate>\n    <metadata key="plater_id" value="1"/>\n    <metadata key="plater_name" value="GUNWEISZ box"/>\n'
         '    <metadata key="locked" value="false"/>\n' + "".join(plate) + '  </plate>\n</config>\n')
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         for k in ["[Content_Types].xml", "_rels/.rels", "3D/3dmodel.model", "3D/_rels/3dmodel.model.rels"] + \
-                 [k for k in files if k.startswith("3D/Objects")] + ["Metadata/model_settings.config"]:
+                 [k for k in files if k.startswith("3D/Objects")] + ["Metadata/project_settings.config", "Metadata/model_settings.config"]:
             z.writestr(k, files[k])
 
 
