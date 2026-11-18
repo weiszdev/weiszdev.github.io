@@ -85,6 +85,24 @@ UNDER_H = OPEN_H + CATCH + 0.2          # half-height behind the lips
 BODY_COLOR   = "#161616"   # black
 LOGO_COLOR   = "#9A9A9A"   # gray
 
+# ---- slicer presets written into the plate files --------------------------------
+X1C_SETTINGS = {            # filament slot 1 = black body, slot 2 = gray logo
+    "printer_model": "Bambu Lab X1 Carbon",
+    "filament_colour": [BODY_COLOR, LOGO_COLOR],
+    "filament_type": ["PLA", "PLA"],
+    "layer_height": "0.2", "initial_layer_print_height": "0.2",
+    "wall_loops": "3", "sparse_infill_density": "15%", "enable_support": "0",
+}
+A1M_SLIDER_SETTINGS = {     # lock sliders: PETG, solid, brim for the tall narrow parts
+    "printer_model": "Bambu Lab A1 mini",
+    "filament_colour": [BODY_COLOR],
+    "filament_type": ["PETG"],
+    "layer_height": "0.12", "initial_layer_print_height": "0.2",
+    "wall_loops": "4", "sparse_infill_density": "100%", "enable_support": "0",
+    "brim_type": "outer_only", "brim_width": "3",
+}
+A1M_SLIDER_COUNT = 4        # 2 for the box + 2 spares
+
 # ---- logo inlay --------------------------------------------------------------
 INLAY        = 0.8         # 4 layers @ 0.2
 LOGO_IMG     = os.path.join(HERE, "gunweisz_logo.webp")
@@ -467,7 +485,7 @@ def print_pose(name, t):
 
 
 # ---- Bambu Studio 3MF (multi-part objects, logo on filament 2) ----------------
-def write_bambu_3mf(path, objects):
+def write_bambu_3mf(path, objects, settings=None, plate_name="GUNWEISZ box"):
     """objects: list of (name, [(part_name, trimesh, extruder)], (x, y))"""
     ns = 'xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02" ' \
          'xmlns:BambuStudio="http://schemas.bambulab.com/package/2021" ' \
@@ -527,19 +545,10 @@ def write_bambu_3mf(path, objects):
         '<Default Extension="png" ContentType="image/png"/>'
         '<Default Extension="config" ContentType="text/xml"/></Types>')
     # filament slots: 1 = black body, 2 = gray logo inlay; X1C, 0.2 mm layers
-    files["Metadata/project_settings.config"] = json.dumps({
-        "printer_model": "Bambu Lab X1 Carbon",
-        "filament_colour": [BODY_COLOR, LOGO_COLOR],
-        "filament_type": ["PLA", "PLA"],
-        "layer_height": "0.2",
-        "initial_layer_print_height": "0.2",
-        "wall_loops": "3",
-        "sparse_infill_density": "15%",
-        "enable_support": "0",
-    }, indent=4)
+    files["Metadata/project_settings.config"] = json.dumps(settings or X1C_SETTINGS, indent=4)
     files["Metadata/model_settings.config"] = (
         '<?xml version="1.0" encoding="UTF-8"?>\n<config>\n' + "".join(cfg) +
-        '  <plate>\n    <metadata key="plater_id" value="1"/>\n    <metadata key="plater_name" value="GUNWEISZ box"/>\n'
+        f'  <plate>\n    <metadata key="plater_id" value="1"/>\n    <metadata key="plater_name" value="{plate_name}"/>\n'
         '    <metadata key="locked" value="false"/>\n' + "".join(plate) + '  </plate>\n</config>\n')
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         for k in ["[Content_Types].xml", "_rels/.rels", "3D/3dmodel.model", "3D/_rels/3dmodel.model.rels"] + \
@@ -579,10 +588,17 @@ if __name__ == "__main__":
     objs = [
         ("tray", [("tray body", tb, 1), ("tray logo (gray)", tl, 2)], (x_tray, y_main)),
         ("lid", [("lid body", lb, 1), ("lid logo (gray)", ll, 2)], (x_lid, y_main)),
-        ("lock slider 1", [("slider", bo, 1)], (128 - 12, y_bolt)),
-        ("lock slider 2", [("slider", bo, 1)], (128 + 12, y_bolt)),
+        # lock sliders print separately in PETG on the A1 mini (see below)
     ]
     write_bambu_3mf(os.path.join(HERE, "gunweisz_22lr_100_x1c.3mf"), objs)
+
+    # A1 mini plate: lock sliders only, PETG (180 x 180 bed)
+    sp = 16.0
+    n = A1M_SLIDER_COUNT
+    objs = [(f"lock slider {i + 1}", [("slider", bo, 1)], (90 + (i - (n - 1) / 2) * sp, 90))
+            for i in range(n)]
+    write_bambu_3mf(os.path.join(HERE, "gunweisz_lock_sliders_a1mini_petg.3mf"), objs,
+                    A1M_SLIDER_SETTINGS, "GUNWEISZ lock sliders PETG")
     # plate footprint check
     print("plate x span", round(x_tray - tsz[0] / 2, 1), round(x_lid + lsz[0] / 2, 1),
           "y span", round(y_bolt - bsz[1] / 2, 1), round(y_main + max(tsz[1], lsz[1]) / 2, 1))

@@ -3,7 +3,8 @@
 Tray 107.9 × 90.4 × 16 mm · lid 115.9 × 95.2 × 24.8 mm (incl. lock pads) · closed height 30.8 mm.
 
 ## Files
-- `gunweisz_22lr_100_x1c.3mf` – Bambu Studio plate: tray, lid and 2 lock sliders, already oriented.
+- `gunweisz_22lr_100_x1c.3mf` – X1C plate: tray + lid, already oriented (PLA, black + gray AMS).
+- `gunweisz_lock_sliders_a1mini_petg.3mf` – A1 mini plate: 4 lock sliders (2 + 2 spares) in PETG, 0.12 mm layers, 100% infill, 3 mm brim.
   Body parts use **filament 1**, logo inlays use **filament 2 (gray)**.
 - `stl/` – the same parts as separate STLs, in print orientation. If the 3MF gives trouble,
   select `tray_body.stl` + `tray_logo.stl` together, drag them in, answer **Yes** to
@@ -20,7 +21,7 @@ Tray 107.9 × 90.4 × 16 mm · lid 115.9 × 95.2 × 24.8 mm (incl. lock pads) ·
 ## Print (X1C)
 - 0.20 mm layers **and 0.20 mm first layer** (the logo inlay is 0.8 mm = 4 layers), 3 walls, 15% infill, no supports.
 - Tray prints bottom-down, lid prints top-down, so both logos land on the smooth bed face.
-- Print 2 sliders (only if you want the locks).
+- Lock sliders: print the A1 mini PETG plate (only if you want the locks).
 
 ## Features
 - 10 × 10 staggered holes, rounds bullet-down; ~11 mm of each round stands proud for easy pick-out.
