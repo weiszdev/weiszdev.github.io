@@ -35,4 +35,4 @@ Tray 107.9 × 90.4 × 16 mm · lid 112.7 × 95.2 × 24.8 mm · closed height 30.
 1. With the lid off the tray, turn a slider 90° so its tongue lies flat, push the tongue through the
    slot in the lid skirt from the outside, turn it back upright, and let the thumb plate drop into its recess.
    It is now captive.
-2. Slide toward the left to unlock (as you face that end). Lid on, then slide right to lock — a small detent clicks at mid-travel.
+2. Facing either end: slide the thumb plate **left to lock**, **right to unlock** (5 mm travel). A small detent clicks at mid-travel.
