@@ -301,12 +301,12 @@ def lid():
     g_out = LID_CLEAR + LID_WALL
     shell = chamfered_prism(g_out, Z_SKIRT, Z_TOP)
     # cavity with a 0.6 mm lead-in at the skirt mouth
-    cav = M.batch_hull([
-        M.extrude(outline(LID_CLEAR + 0.6), EPS).translate([0, 0, Z_SKIRT - 1]),
-        M.extrude(outline(LID_CLEAR + 0.6), EPS).translate([0, 0, Z_SKIRT]),
-        M.extrude(outline(LID_CLEAR), EPS).translate([0, 0, Z_SKIRT + 0.6]),
-        M.extrude(outline(LID_CLEAR), EPS).translate([0, 0, Z_CEIL - EPS]),
-    ])
+    cav = M.extrude(outline(LID_CLEAR), Z_CEIL - Z_SKIRT + 1).translate([0, 0, Z_SKIRT - 1]) + \
+        M.batch_hull([
+            M.extrude(outline(LID_CLEAR + 0.6), EPS).translate([0, 0, Z_SKIRT - 1]),
+            M.extrude(outline(LID_CLEAR + 0.6), EPS).translate([0, 0, Z_SKIRT]),
+            M.extrude(outline(LID_CLEAR), EPS).translate([0, 0, Z_SKIRT + 0.6]),
+        ])
     lid = shell - cav
 
     adds = []

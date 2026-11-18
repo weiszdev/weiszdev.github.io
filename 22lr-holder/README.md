@@ -9,7 +9,12 @@ Tray 107.9 × 90.4 × 16 mm · lid 115.9 × 95.2 × 24.8 mm (incl. lock pads) ·
   select `tray_body.stl` + `tray_logo.stl` together, drag them in, answer **Yes** to
   "load as a single object with multiple parts", and set the logo part to the gray filament.
   Do the same for `lid_body.stl` + `lid_logo.stl`.
-- `make_holder.py` – parametric source (all dimensions at the top).
+- `step/` – **SOLIDWORKS / CAD review**: true solids (real cylinders, planes, chamfers), black body + gray logo:
+  - `gunweisz_22lr_box_assembly.step` – full box, lid on, both lock sliders installed and locked.
+  - `tray.step`, `lid.step`, `lock_slider.step` – single parts (body + logo inlay as two coloured bodies).
+  - In SOLIDWORKS: File → Open → STEP (*.step). Answer **Yes** to "run Import Diagnostics" if asked.
+- `make_holder.py` – parametric source (all dimensions at the top); writes the 3MF + STLs.
+- `make_step.py` – rebuilds the same parts as CAD solids and writes `step/` (`pip install cadquery`).
 - `preview/` – renders.
 
 ## Print (X1C)
