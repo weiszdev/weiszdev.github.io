@@ -57,21 +57,29 @@ SCOOP_DEPTH  = 3.0
 SCOOP_H      = 4.0         # how far below the lid edge it reaches
 
 # ---- slide lock (short ends, optional) ---------------------------------------
-# A thumb slider rides in a recess on each short side of the lid skirt.  Its
-# round stem passes through a slot in the skirt and carries a tongue that
-# drops down an entry channel in the tray end and slides sideways into a
-# roofed groove (bayonet) - the roof is what stops the lid lifting.
-LOCK_Z       = 11.0        # tongue centre height (tray coords, lid seated)
+# A raised pad on each short side of the lid holds an undercut track.  The
+# slider has two spring arms (top + bottom) with ramped catches: push it
+# straight in, the arms flex past the track lips and snap out behind them.
+# Its bar passes through a slot in the skirt and, slid sideways, drops into a
+# roofed groove in the tray end (bayonet) - the roof stops the lid lifting.
+LOCK_Z       = 11.0        # slider centre height (tray coords, lid seated)
 LOCK_TRAVEL  = 5.0         # sideways slide, unlocked -> locked
 LOCK_FLOAT   = 1.0         # lid can rise this much while locked
-STEM_D       = 3.0
-TONGUE_W     = 2.8         # along the slide
-TONGUE_H     = 4.0
-TONGUE_T     = 2.0         # into the tray
-PLATE_W, PLATE_H, PLATE_T = 12.0, 6.4, 2.0
-RECESS       = 0.8         # plate recess depth in skirt
+BAR_W, BAR_H = 2.8, 3.0    # the bar / tongue that engages the tray
+TONGUE_REACH = 2.6         # tongue tip, measured in from the tray face
+PAD          = 1.6         # pad stands this far out from the lid skirt
+LIP_T        = 0.8         # track lip thickness
+UNDERCUT     = 1.6         # depth behind the lips
+OPEN_H       = 2.6         # half-height of the track opening
+CATCH        = 0.6         # how far each catch hooks behind a lip
+SLIT         = 0.8         # flex room under each arm
+ARM_T        = 1.0         # spring arm thickness
+SLIDER_L     = 13.0        # slider length (along the slide)
+GRIP_OUT     = 1.4         # thumb grip proud of the pad face
 LOCK_CLEAR   = 0.25
 DETENT_PROUD = 0.5
+
+UNDER_H = OPEN_H + CATCH + 0.2          # half-height behind the lips
 
 # ---- logo inlay --------------------------------------------------------------
 INLAY        = 0.8         # 4 layers @ 0.2
@@ -205,7 +213,7 @@ def standoff_xy():
                         continue
                     if np.min(np.hypot(*(mags - p).T)) < MAG_BOSS_D / 2 + r + 0.8:
                         continue
-                    if abs(p[1]) < LOCK_TRAVEL / 2 + PLATE_W / 2 + 1:      # keep clear of lock channel
+                    if abs(p[1]) < LOCK_TRAVEL / 2 + 4:      # keep clear of lock channel
                         continue
                     d = math.hypot(XO - x, YO - y)
                     if best is None or d < best[0]:
@@ -253,10 +261,10 @@ def tray():
     # right end is the same rotated 180 deg so the lid fits either way round)
     c = LOCK_CLEAR
     yu, yl = -LOCK_TRAVEL / 2, LOCK_TRAVEL / 2
-    depth = (RECESS + STEM_L - LID_CLEAR - LID_WALL) + TONGUE_T + 0.35  # past the face
-    zb = LOCK_Z - TONGUE_H / 2 - c
-    zt = LOCK_Z + TONGUE_H / 2 + c + LOCK_FLOAT
-    hw = TONGUE_W / 2 + c
+    depth = TONGUE_REACH + 0.35
+    zb = LOCK_Z - BAR_H / 2 - c
+    zt = LOCK_Z + BAR_H / 2 + c + LOCK_FLOAT
+    hw = BAR_W / 2 + c
     entry = M.cube([depth + 1, 2 * hw, TRAY_H + 2 - zb]).translate([-XO - 1, yu - hw, zb])
     groove = M.cube([depth + 1, yl - yu + 2 * hw, zt - zb]).translate([-XO - 1, yu - hw, zb])
     bump = M.cylinder(zt - zb, 0.8, 0.8, 24).translate([-XO + depth + 0.8 - DETENT_PROUD, 0, zb])
@@ -313,17 +321,13 @@ def lid():
                        .translate([x, y, zb - EPS]))
     lid = lid + M.batch_boolean(adds, m3d.OpType.Add)
 
-    # slider recess + stem slot in each short side of the skirt
-    yu, yl = -LOCK_TRAVEL / 2, LOCK_TRAVEL / 2
-    sk_out = -XO - LID_CLEAR - LID_WALL
-    rh = PLATE_H / 2 + 0.2
-    recess = M.cube([RECESS + 1, (yl - yu) + PLATE_W + 0.4, 2 * rh]) \
-        .translate([sk_out - 1, yu - PLATE_W / 2 - 0.2, LOCK_Z - rh])
-    sh = STEM_D / 2 + 0.2
-    slot = M.cube([LID_WALL + LID_CLEAR + 2, (yl - yu) + 2 * sh, 2 * sh]) \
-        .translate([sk_out - 1, yu - sh, LOCK_Z - sh])
+    # raised pad + undercut snap track + bar slot on each short side
+    pads, tracks = [], []
     for rz in (0, 180):
-        pockets.append((recess + slot).rotate([0, 0, rz]))
+        pad, trk = lock_pad_and_track()
+        pads.append(pad.rotate([0, 0, rz]))
+        pockets.append(trk.rotate([0, 0, rz]))
+    lid = lid + M.batch_boolean(pads, m3d.OpType.Add)
     lid = lid - M.batch_boolean(pockets, m3d.OpType.Add)
     return lid
 
@@ -340,33 +344,87 @@ def lid_logo():
 
 
 # ============================================================================
-# SLIDE-LOCK SLIDER (print 2)
+# SLIDE-LOCK (pad/track on the lid, snap-in slider - print 2)
 # ============================================================================
-STEM_L = LID_WALL + 0.2        # long enough for the twist-in install
+SKIRT_OUT = -XO - LID_CLEAR - LID_WALL      # left-end skirt outer face (x)
+PAD_FACE = SKIRT_OUT - PAD
+TRACK_FLOOR = PAD_FACE + LIP_T + UNDERCUT
+Y_UNLOCK, Y_LOCK = -LOCK_TRAVEL / 2, LOCK_TRAVEL / 2   # bar centre (left end)
+TRACK_Y0 = Y_UNLOCK - BAR_W / 2 - 0.3
+TRACK_Y1 = Y_LOCK - BAR_W / 2 + SLIDER_L + 0.3
+
+
+def lock_pad_and_track():
+    """Left end.  Returns (pad to add, cutter to subtract) in tray coords."""
+    m = 2.6                                     # pad margin around the track
+    y0, y1 = TRACK_Y0 - m, TRACK_Y1 + m
+    z0, z1 = LOCK_Z - UNDER_H - 1.4, LOCK_Z + UNDER_H + 1.4
+    ch = 0.8
+    x_in = SKIRT_OUT + 0.6                      # overlap into the skirt
+    pad = M.batch_hull([
+        M.cube([EPS, y1 - y0 - 2 * ch, z1 - z0 - 2 * ch]).translate([PAD_FACE, y0 + ch, z0 + ch]),
+        M.cube([x_in - PAD_FACE - ch, y1 - y0, z1 - z0]).translate([PAD_FACE + ch, y0, z0]),
+    ])
+    L = TRACK_Y1 - TRACK_Y0
+    opening = M.cube([LIP_T + 1, L, 2 * OPEN_H]).translate([PAD_FACE - 1, TRACK_Y0, LOCK_Z - OPEN_H])
+    # small lead-in chamfer on the lip edges helps the catches ride over
+    lead = M.batch_hull([
+        M.cube([EPS, L, 2 * (OPEN_H + 0.4)]).translate([PAD_FACE - EPS, TRACK_Y0, LOCK_Z - OPEN_H - 0.4]),
+        M.cube([EPS, L, 2 * OPEN_H]).translate([PAD_FACE + 0.4, TRACK_Y0, LOCK_Z - OPEN_H]),
+    ])
+    under = M.cube([UNDERCUT, L, 2 * UNDER_H]).translate([PAD_FACE + LIP_T, TRACK_Y0, LOCK_Z - UNDER_H])
+    sh = BAR_H / 2 + 0.25
+    slot = M.cube([TRACK_FLOOR - SKIRT_OUT + LID_WALL + LID_CLEAR + 1, (Y_LOCK - Y_UNLOCK) + BAR_W + 0.6, 2 * sh]) \
+        .translate([TRACK_FLOOR - 0.1, Y_UNLOCK - BAR_W / 2 - 0.3, LOCK_Z - sh])
+    return pad, opening + lead + under + slot
 
 
 def slider():
-    """Local coords: x = inward, plate outer face at x=0, centred on y/z."""
-    plate = M.batch_hull([
-        M.cube([EPS, PLATE_W - 1.2, PLATE_H - 1.2], center=True).translate([EPS / 2, 0, 0]),
-        M.cube([PLATE_T - 0.6, PLATE_W, PLATE_H], center=True).translate([0.6 + (PLATE_T - 0.6) / 2, 0, 0]),
+    """Local coords: x inward (pad face at x=0), y along the slide with the
+    bar at y in [0, BAR_W], z centred.  Prints standing on the bar end."""
+    c = 0.2
+    xb = LIP_T + 0.1                       # back of lips -> arms start here
+    xf = LIP_T + UNDERCUT - c              # front of core / arms (track floor - c)
+    gh = OPEN_H - c                        # grip/neck half-height
+    grip = M.batch_hull([
+        M.cube([EPS, SLIDER_L - 1.2, 2 * gh - 1.2]).translate([-GRIP_OUT, 0.6, -gh + 0.6]),
+        M.cube([GRIP_OUT - 0.5, SLIDER_L, 2 * gh]).translate([-GRIP_OUT + 0.5, 0, -gh]),
     ])
-    stem = M.cylinder(STEM_L + 0.5, STEM_D / 2, STEM_D / 2, 32).rotate([0, 90, 0]) \
-        .translate([PLATE_T - 0.2, 0, 0])
-    x0 = PLATE_T + STEM_L
-    tongue = M.cube([TONGUE_T, TONGUE_W, TONGUE_H]).translate([x0, -TONGUE_W / 2, -TONGUE_H / 2])
-    # 45 deg transition so the tongue prints without a flat overhang
-    neck = M.batch_hull([M.cylinder(EPS, STEM_D / 2, STEM_D / 2, 32).rotate([0, 90, 0]).translate([x0 - 0.8, 0, 0]),
-                         M.cube([EPS, TONGUE_W, TONGUE_H]).translate([x0, -TONGUE_W / 2, -TONGUE_H / 2])])
-    neck = neck ^ M.cube([2, TONGUE_W, TONGUE_H]).translate([x0 - 1, -TONGUE_W / 2, -TONGUE_H / 2])
-    return plate + stem + neck + tongue
+    # grip ridges for the thumb
+    for k in (-1, 0, 1):
+        grip = grip + M.cube([0.5, 0.8, 2 * gh - 1.6]).translate([-GRIP_OUT - 0.4, SLIDER_L / 2 + 2.6 * k - 0.4, -gh + 0.8])
+    core_h = OPEN_H - ARM_T - SLIT - c      # rigid core half-height between the slits
+    root = BAR_W + 0.4                      # arms are anchored here
+    neck = M.cube([xb + 0.01, root, 2 * gh]).translate([0, 0, -gh]) + \
+        M.cube([xb + 0.01, SLIDER_L, 2 * core_h]).translate([0, 0, -core_h])
+    core = M.cube([xf - xb, SLIDER_L, 2 * core_h]).translate([xb, 0, -core_h]) + \
+        M.cube([xf - xb, root, 2 * gh]).translate([xb, 0, -gh])
+    arms = []
+    for sz in (1, -1):
+        z_lo = OPEN_H - c - ARM_T if sz > 0 else -(OPEN_H - c)
+        arm = M.cube([xf - xb, SLIDER_L, ARM_T]).translate([xb, 0, z_lo])
+        # ramped catch at the free end: flat back faces the lip, slope leads in
+        tip_len = 2.0
+        ztop = OPEN_H + CATCH
+        base = OPEN_H - c
+        prof = poly([(xb, base), (xb, ztop), (xb + 0.3, ztop), (xf, base + 0.05)])
+        catch = M.extrude(prof, tip_len)                       # in (x, z) along +y... remap below
+        catch = catch.transform([[1, 0, 0, 0], [0, 0, 1, SLIDER_L - tip_len], [0, 1, 0, 0]])
+        # 45 deg run-in below the catch so it prints standing up without an overhang
+        sliver = M.cube([xf - xb, EPS, EPS]).translate([xb, SLIDER_L - tip_len - (ztop - base), base - EPS])
+        catch = M.batch_hull([catch, sliver])
+        if sz < 0:
+            catch = catch.mirror([0, 0, 1])
+        arms.append(arm + catch)
+    bar = M.cube([(TRACK_FLOOR - PAD_FACE) - xf + 0.01 + (TONGUE_REACH - (TRACK_FLOOR - (-XO))), BAR_W, BAR_H]) \
+        .translate([xf - 0.01, 0, -BAR_H / 2])
+    return grip + neck + core + bar + M.batch_boolean(arms, m3d.OpType.Add)
 
 
 def slider_assembled(locked, lid_dz=0.0):
     """Left-end slider in tray coordinates (lid seated + lid_dz)."""
-    y = LOCK_TRAVEL / 2 if locked else -LOCK_TRAVEL / 2
-    plate_in = -XO - LID_CLEAR - LID_WALL + RECESS
-    return slider().translate([plate_in - PLATE_T, y, LOCK_Z + lid_dz])
+    y = (Y_LOCK if locked else Y_UNLOCK) - BAR_W / 2
+    return slider().translate([PAD_FACE, y, LOCK_Z + lid_dz])
 
 
 # ============================================================================
@@ -398,8 +456,8 @@ def print_pose(name, t):
         t.apply_transform(trimesh.transformations.rotation_matrix(math.pi, [1, 0, 0]))
         t.apply_translation([0, 0, Z_TOP])
     if name == "lock_slider":
-        # thumb plate flat on the bed, tongue up
-        t.apply_transform(trimesh.transformations.rotation_matrix(-math.pi / 2, [0, 1, 0]))
+        # stand it on the bar end: the spring arms then bend along the layers
+        t.apply_transform(trimesh.transformations.rotation_matrix(math.pi / 2, [1, 0, 0]))
         t.apply_translation([0, 0, -t.bounds[0][2]])
     return t
 
