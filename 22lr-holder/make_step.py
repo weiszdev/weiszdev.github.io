@@ -115,7 +115,7 @@ def lock_pad_and_track():
     m = 2.6
     y0, y1 = mh.TRACK_Y0 - m, mh.TRACK_Y1 + m
     z0, z1 = mh.LOCK_Z - mh.UNDER_H - 1.4, mh.LOCK_Z + mh.UNDER_H + 1.4
-    x_in = mh.SKIRT_OUT + 0.6
+    x_in = mh.TRACK_FLOOR + 0.8
     pad = box(mh.PAD_FACE, y0, z0, x_in - mh.PAD_FACE, y1 - y0, z1 - z0).faces("<X").edges().chamfer(0.8)
     L = mh.TRACK_Y1 - mh.TRACK_Y0
     opening = box(mh.PAD_FACE - 1, mh.TRACK_Y0, mh.LOCK_Z - mh.OPEN_H, mh.LIP_T + 1, L, 2 * mh.OPEN_H)
@@ -172,8 +172,8 @@ def slider():
     gh = mh.OPEN_H - c
     Ls = mh.SLIDER_L
     s = box(-mh.GRIP_OUT, 0, -gh, mh.GRIP_OUT, Ls, 2 * gh).faces("<X").edges().chamfer(0.55)
-    for k in (-1, 0, 1):
-        s = s.union(box(-mh.GRIP_OUT - 0.4, Ls / 2 + 2.6 * k - 0.4, -gh + 0.8, 0.5, 0.8, 2 * gh - 1.6))
+    for k in (-2, -1, 0, 1, 2):
+        s = s.union(box(-mh.GRIP_OUT - 0.6, Ls / 2 + 3.2 * k - 0.5, -gh + 0.8, 0.7, 1.0, 2 * gh - 1.6))
     core_h = mh.OPEN_H - mh.ARM_T - mh.SLIT - c
     root = mh.BAR_W + 0.4
     s = s.union(box(-0.01, 0, -gh, xb + 0.02, root, 2 * gh))

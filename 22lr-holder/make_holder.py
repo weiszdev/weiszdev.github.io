@@ -39,7 +39,7 @@ CHAMFER      = 1.0         # every external edge
 # ---- lid -------------------------------------------------------------------
 LID_CLEAR    = 0.4         # per side, skirt to tray
 LID_WALL     = 2.0
-LID_SKIRT    = 10.0        # how far the skirt hangs down over the tray
+LID_SKIRT    = 11.5        # how far the skirt hangs down over the tray
 LID_TOP      = 2.4
 HEADROOM     = 1.0         # ceiling above the tallest round, lid on standoffs
 STANDOFF_D   = 4.5
@@ -54,7 +54,7 @@ MAG_BOSS_D   = 8.4
 # ---- finger scoops (long sides) ---------------------------------------------
 SCOOP_W      = 26.0        # opening width at the tray face
 SCOOP_DEPTH  = 3.0
-SCOOP_H      = 4.0         # how far below the lid edge it reaches
+SCOOP_H      = 3.2         # how far below the lid edge it reaches
 
 # ---- slide lock (short ends, optional) ---------------------------------------
 # A raised pad on each short side of the lid holds an undercut track.  The
@@ -62,20 +62,20 @@ SCOOP_H      = 4.0         # how far below the lid edge it reaches
 # straight in, the arms flex past the track lips and snap out behind them.
 # Its bar passes through a slot in the skirt and, slid sideways, drops into a
 # roofed groove in the tray end (bayonet) - the roof stops the lid lifting.
-LOCK_Z       = 11.0        # slider centre height (tray coords, lid seated)
-LOCK_TRAVEL  = 5.0         # sideways slide, unlocked -> locked
+LOCK_Z       = 10.5        # slider centre height (tray coords, lid seated)
+LOCK_TRAVEL  = 6.0         # sideways slide, unlocked -> locked
 LOCK_FLOAT   = 1.0         # lid can rise this much while locked
-BAR_W, BAR_H = 2.8, 3.0    # the bar / tongue that engages the tray
-TONGUE_REACH = 2.6         # tongue tip, measured in from the tray face
-PAD          = 1.6         # pad stands this far out from the lid skirt
-LIP_T        = 0.8         # track lip thickness
-UNDERCUT     = 1.6         # depth behind the lips
-OPEN_H       = 2.6         # half-height of the track opening
-CATCH        = 0.6         # how far each catch hooks behind a lip
-SLIT         = 0.8         # flex room under each arm
-ARM_T        = 1.0         # spring arm thickness
-SLIDER_L     = 13.0        # slider length (along the slide)
-GRIP_OUT     = 1.4         # thumb grip proud of the pad face
+BAR_W, BAR_H = 4.0, 4.0    # the bar / tongue that engages the tray
+TONGUE_REACH = 3.0         # tongue tip, measured in from the tray face
+PAD          = 2.4         # pad stands this far out from the lid skirt
+LIP_T        = 1.0         # track lip thickness
+UNDERCUT     = 2.0         # depth behind the lips
+OPEN_H       = 3.4         # half-height of the track opening
+CATCH        = 0.8         # how far each catch hooks behind a lip
+SLIT         = 1.0         # flex room under each arm
+ARM_T        = 1.4         # spring arm thickness
+SLIDER_L     = 18.0        # slider length (along the slide)
+GRIP_OUT     = 1.6         # thumb grip proud of the pad face
 LOCK_CLEAR   = 0.25
 DETENT_PROUD = 0.5
 
@@ -382,7 +382,7 @@ def lock_pad_and_track():
     y0, y1 = TRACK_Y0 - m, TRACK_Y1 + m
     z0, z1 = LOCK_Z - UNDER_H - 1.4, LOCK_Z + UNDER_H + 1.4
     ch = 0.8
-    x_in = SKIRT_OUT + 0.6                      # overlap into the skirt
+    x_in = TRACK_FLOOR + 0.8                    # back wall behind the track
     pad = M.batch_hull([
         M.cube([EPS, y1 - y0 - 2 * ch, z1 - z0 - 2 * ch]).translate([PAD_FACE, y0 + ch, z0 + ch]),
         M.cube([x_in - PAD_FACE - ch, y1 - y0, z1 - z0]).translate([PAD_FACE + ch, y0, z0]),
@@ -413,8 +413,8 @@ def slider():
         M.cube([GRIP_OUT - 0.5, SLIDER_L, 2 * gh]).translate([-GRIP_OUT + 0.5, 0, -gh]),
     ])
     # grip ridges for the thumb
-    for k in (-1, 0, 1):
-        grip = grip + M.cube([0.5, 0.8, 2 * gh - 1.6]).translate([-GRIP_OUT - 0.4, SLIDER_L / 2 + 2.6 * k - 0.4, -gh + 0.8])
+    for k in (-2, -1, 0, 1, 2):
+        grip = grip + M.cube([0.7, 1.0, 2 * gh - 1.6]).translate([-GRIP_OUT - 0.6, SLIDER_L / 2 + 3.2 * k - 0.5, -gh + 0.8])
     core_h = OPEN_H - ARM_T - SLIT - c      # rigid core half-height between the slits
     root = BAR_W + 0.4                      # arms are anchored here
     neck = M.cube([xb + 0.01, root, 2 * gh]).translate([0, 0, -gh]) + \

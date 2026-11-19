@@ -1,6 +1,6 @@
 # GUNWEISZ 100-round .22 LR box (v2)
 
-Tray 107.9 × 90.4 × 16 mm · lid 115.9 × 95.2 × 24.8 mm (incl. lock pads) · closed height 30.8 mm.
+Tray 107.9 × 90.4 × 16 mm · lid 117.5 × 95.2 × 26.3 mm (incl. lock pads) · closed height 30.8 mm.
 
 ## Files
 - `gunweisz_22lr_100_x1c.3mf` – X1C plate: tray + lid, already oriented (PLA, black + gray AMS).
@@ -37,13 +37,17 @@ Tray 107.9 × 90.4 × 16 mm · lid 115.9 × 95.2 × 24.8 mm (incl. lock pads) ·
   springs back when pressed. Without the locks, 6 × 2.5 mm N52s will lift the light lid well over 1 mm.
 - Glue them in (CA) — the pockets are a slip fit. Mark polarity before gluing so all 4 pairs match.
 
-## Slide locks (optional, both short ends)
+## Slide locks (optional, both short ends) – heavy-duty v2
+Slider 18 × 8.4 × 6.4 mm; 1.4 mm spring arms with 0.8 mm catches; 4 × 4 mm locking bar; 1.0 mm track lips.
+Printed sliders from the earlier (smaller) version do **not** fit this lid/tray – reprint all three.
+See `preview/lock_assembly_steps.png` for the assembly steps.
+
 - Each short side of the lid has a raised pad with an undercut track.
 - The slider has two spring arms with ramped catches. **Push it straight into the track until it
   clicks**; the arms flex past the lips and snap out behind them, so it cannot pull back out.
   (To remove, press both catches in with a small screwdriver.)
 - Its bar passes through the lid skirt. Lid on, facing either end: slide the grip **left to lock**,
-  **right to unlock** (5 mm travel); a detent clicks at mid-travel. Locked, the lid can lift at most
+  **right to unlock** (6 mm travel); a detent clicks at mid-travel. Locked, the lid can lift at most
   ~1.25 mm.
 - Sliders print standing on end (already oriented in the 3MF) so the spring arms bend along the
   layers, not across them. PLA works; PETG is even more forgiving for snap parts.
