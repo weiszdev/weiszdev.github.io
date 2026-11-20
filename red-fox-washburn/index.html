@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>The Red Fox — Diner &amp; Tavern | Washburn, ND</title>
   <meta name="description" content="The Red Fox Diner &amp; Tavern in Washburn, North Dakota. Breakfast and lunch, Lotus energy, espresso, and immediate pickup ordering. 1317 Border Lane. (701) 462-8175.">
   <meta name="theme-color" content="#1A1411">
@@ -123,7 +125,7 @@
           <div class="hero-scrim"></div>
         </div>
         <div class="hero-inner">
-          <svg class="hero-brand" viewBox="0 0 220 220" role="img" aria-label="The Red Fox Diner and Tavern">
+          <svg class="hero-brand hero-badge" viewBox="0 0 220 220" role="img" aria-label="The Red Fox Diner and Tavern">
             <use href="#fox-badge"/>
           </svg>
           <p class="status" id="status-badge">
@@ -162,10 +164,18 @@
             <button type="button" role="tab" data-tab="seasonal" aria-selected="false">Christmas Seasonal <span class="count" data-count="seasonal"></span></button>
             <button type="button" role="tab" data-tab="full" aria-selected="false">Full Menu <span class="count" data-count="full"></span></button>
           </div>
-          <div class="size-legend">
-            <p><strong>Coffee &amp; Lotus sizes.</strong> Standard 16 oz $6.00 · 24 oz $7.50 · 32 oz $9.00. Signature, Seasonal &amp; Wicked Den 16 oz $7.00 · 24 oz $8.50 · 32 oz $10.00. Hot Cocoa is 16 oz $4.</p>
-            <p>Add-ons: extra shot +$1.00 · add cold foam +$1.00. Milk: 2%, Half &amp; Half, Oat Milk. Syrups: Vanilla, Caramel, Brown Sugar, Toasted Marshmallow, Salted Caramel, Coconut, Pumpkin Pie, Crème de Banana. No sugar-free syrups yet, with plans to expand based on guest demand.</p>
-          </div>
+          <details class="size-legend" id="size-legend" open>
+            <summary>Coffee &amp; Lotus sizes · from $4, add-ons +$1</summary>
+            <div class="size-legend-body">
+              <p><strong>Coffee &amp; Lotus sizes.</strong> Standard 16 oz $6.00 · 24 oz $7.50 · 32 oz $9.00. Signature, Seasonal &amp; Wicked Den 16 oz $7.00 · 24 oz $8.50 · 32 oz $10.00. Hot Cocoa is 16 oz $4.</p>
+              <p>Add-ons: extra shot +$1.00 · add cold foam +$1.00. Milk: 2%, Half &amp; Half, Oat Milk. Syrups: Vanilla, Caramel, Brown Sugar, Toasted Marshmallow, Salted Caramel, Coconut, Pumpkin Pie, Crème de Banana. No sugar-free syrups yet, with plans to expand based on guest demand.</p>
+            </div>
+          </details>
+          <script>
+            if (window.matchMedia("(max-width: 768px)").matches) {
+              document.getElementById("size-legend").removeAttribute("open");
+            }
+          </script>
           <div class="toolbar">
             <label class="search">
               <span class="sr-only">Search the menu</span>
@@ -178,7 +188,7 @@
               <button type="button" class="chip" data-chip="veg" aria-pressed="false">Vegetarian</button>
             </div>
           </div>
-          <div class="subs" id="menu-subs" role="toolbar" aria-label="Subcategories"></div>
+          <div class="subs subpills" id="menu-subs" role="toolbar" aria-label="Subcategories"></div>
           <p id="menu-meta" aria-live="polite"></p>
           <div class="menu-grid" id="menu-grid"></div>
           <p class="fda">*Whether dining out or preparing food at home, consuming raw or undercooked meats, poultry, seafood, shellfish or eggs may increase your risk of foodborne illness.</p>
@@ -445,7 +455,7 @@
                   <p>Neighbors type this once. Orders, hours, and the lunch menu stay on your brand.</p>
                 </div>
                 <div class="sticker">
-                  <div>
+                  <div class="sticker-copy">
                     <strong id="domain-sticker">redfoxwashburn.com</strong>
                     <span>Washburn, ND</span>
                   </div>
@@ -478,7 +488,11 @@
     </footer>
   </div>
 
-  <button class="fab" type="button" id="cart-fab" hidden>Bag · <span id="fab-total">$0.00</span></button>
+  <button class="fab" type="button" id="cart-fab" hidden>
+    <span class="fab-label">View Bag</span>
+    <span class="fab-count" id="fab-count">0</span>
+    <span class="fab-sum" id="fab-total">$0.00</span>
+  </button>
   <div class="backdrop" id="backdrop" hidden></div>
   <aside class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="bag-title" hidden>
     <header>
@@ -492,67 +506,80 @@
   <dialog class="item-dialog" id="item-dialog" aria-labelledby="modal-title">
     <div class="modal-grid">
       <div class="modal-photo">
-        <img id="modal-img" alt="" width="1152" height="864">
+        <img id="modal-img" alt="" width="1152" height="864" src="./images/hero-spread.jpg">
       </div>
-      <div class="modal-body">
-        <button class="icon-close" type="button" id="modal-close" aria-label="Close item">×</button>
-        <p class="kicker" id="modal-kicker"></p>
-        <h2 id="modal-title"></h2>
-        <p id="modal-desc"></p>
-        <p class="service-line" id="modal-service"></p>
-        <p id="modal-includes"></p>
-        <blockquote id="modal-quote" hidden></blockquote>
-        <div id="modal-options"></div>
-        <label>Note to the kitchen
-          <textarea id="modal-notes" maxlength="140" placeholder="Allergies, no onion, extra gravy…"></textarea>
-        </label>
-        <p class="live-price" id="modal-price" aria-live="polite"></p>
-        <div class="modal-actions">
-          <div class="qty">
-            <button type="button" id="modal-dec" aria-label="Decrease quantity">−</button>
-            <span id="modal-qty">1</span>
-            <button type="button" id="modal-inc" aria-label="Increase quantity">+</button>
+      <div class="modal-col">
+        <header class="sheet-head">
+          <div class="sheet-titles">
+            <p class="kicker" id="modal-kicker"></p>
+            <h2 id="modal-title"></h2>
           </div>
-          <button class="btn btn-primary" type="button" id="modal-add">Add to bag</button>
+          <button class="icon-close" type="button" id="modal-close" aria-label="Close item">×</button>
+        </header>
+        <div class="sheet-scroll modal-body">
+          <p id="modal-desc"></p>
+          <p class="service-line" id="modal-service"></p>
+          <p id="modal-includes"></p>
+          <blockquote id="modal-quote" hidden></blockquote>
+          <div id="modal-options"></div>
+          <label class="note-label">Note to the kitchen
+            <textarea id="modal-notes" maxlength="140" placeholder="Allergies, no onion, extra gravy…"></textarea>
+          </label>
         </div>
+        <footer class="sheet-foot">
+          <p class="live-price" id="modal-price" aria-live="polite"></p>
+          <div class="modal-actions">
+            <div class="qty">
+              <button type="button" id="modal-dec" aria-label="Decrease quantity">−</button>
+              <span id="modal-qty">1</span>
+              <button type="button" id="modal-inc" aria-label="Increase quantity">+</button>
+            </div>
+            <button class="btn btn-primary" type="button" id="modal-add">Add to bag</button>
+          </div>
+        </footer>
       </div>
     </div>
   </dialog>
 
   <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-title">
-    <div class="order-head">
-      <div>
+    <header class="sheet-head order-head">
+      <div class="sheet-titles">
         <p class="eyebrow">Interactive preview</p>
         <h2 id="order-title">Order placed — demo only</h2>
         <p id="order-summary"></p>
       </div>
       <button class="icon-close" type="button" id="order-close" aria-label="Close confirmation">×</button>
-    </div>
-    <p class="demo-banner" id="order-banner"></p>
-    <div class="order-tabs" role="tablist" aria-label="Order preview">
-      <button type="button" role="tab" id="tab-guest" aria-selected="true" aria-controls="panel-guest">Guest Experience</button>
-      <button type="button" role="tab" id="tab-kitchen" aria-selected="false" aria-controls="panel-kitchen">Kitchen &amp; Barista Ticket</button>
-    </div>
-    <div role="tabpanel" id="panel-guest" aria-labelledby="tab-guest">
-      <div class="guest-layout">
-        <ol class="timeline" id="timeline">
-          <li data-step="0">Order Received</li>
-          <li data-step="1">Grill &amp; Espresso Bar Firing</li>
-          <li data-step="2">Packing</li>
-          <li data-step="3">Ready at Counter</li>
-        </ol>
-        <div class="phone" aria-label="Sample text message preview">
-          <div class="phone-top">Messages · The Red Fox</div>
-          <div class="bubble" id="sms-1"></div>
-          <div class="bubble" id="sms-2" hidden></div>
-          <div class="bubble quiet">Demo preview. No text is sent.</div>
-        </div>
+    </header>
+    <div class="sheet-scroll">
+      <p class="demo-banner" id="order-banner"></p>
+      <div class="order-tabs" role="tablist" aria-label="Order preview">
+        <button type="button" role="tab" id="tab-guest" aria-selected="true" aria-controls="panel-guest">Guest Experience</button>
+        <button type="button" role="tab" id="tab-kitchen" aria-selected="false" aria-controls="panel-kitchen">Kitchen &amp; Barista Ticket</button>
       </div>
-      <p><button class="linkish" type="button" id="replay-status">Replay the status</button></p>
+      <div role="tabpanel" id="panel-guest" aria-labelledby="tab-guest">
+        <div class="guest-layout">
+          <ol class="timeline" id="timeline">
+            <li data-step="0">Order Received</li>
+            <li data-step="1">Grill &amp; Espresso Bar Firing</li>
+            <li data-step="2">Packing</li>
+            <li data-step="3">Ready at Counter</li>
+          </ol>
+          <div class="phone" aria-label="Sample text message preview">
+            <div class="phone-top">Messages · The Red Fox</div>
+            <div class="bubble" id="sms-1"></div>
+            <div class="bubble" id="sms-2" hidden></div>
+            <div class="bubble quiet">Demo preview. No text is sent.</div>
+          </div>
+        </div>
+        <p><button class="linkish" type="button" id="replay-status">Replay the status</button></p>
+      </div>
+      <div role="tabpanel" id="panel-kitchen" aria-labelledby="tab-kitchen" hidden>
+        <div class="ticket" id="ticket"></div>
+      </div>
     </div>
-    <div role="tabpanel" id="panel-kitchen" aria-labelledby="tab-kitchen" hidden>
-      <div class="ticket" id="ticket"></div>
-    </div>
+    <footer class="sheet-foot">
+      <button class="btn btn-primary btn-block" type="button" id="order-done">Done</button>
+    </footer>
   </dialog>
 
   <div class="toasts" id="toasts" aria-live="polite"></div>

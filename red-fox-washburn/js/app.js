@@ -491,6 +491,7 @@ function priceLine(item) {
     $("#cart-count").textContent = String(count);
     const fab = $("#cart-fab");
     const total = receipt(cartSubtotal());
+    $("#fab-count").textContent = String(count);
     $("#fab-total").textContent = total;
     if (count > 0) {
       fab.hidden = false;
@@ -499,6 +500,8 @@ function priceLine(item) {
       fab.classList.remove("show");
       fab.hidden = true;
     }
+    const bagLabel = `View bag, ${count} ${count === 1 ? "item" : "items"}, subtotal ${total}`;
+    fab.setAttribute("aria-label", bagLabel);
     $("#header-cart").setAttribute("aria-label", `Open order bag, ${count} items, ${total}`);
     if (!$("#cart-drawer").hidden) renderCart();
   }
@@ -1090,6 +1093,7 @@ function priceLine(item) {
     $$(".domain-pill").forEach((btn) => btn.addEventListener("click", () => setDomain(btn.dataset.domain)));
 
     $("#order-close").addEventListener("click", () => $("#order-dialog").close());
+    $("#order-done").addEventListener("click", () => $("#order-dialog").close());
     $("#order-dialog").addEventListener("click", (event) => {
       if (event.target === $("#order-dialog")) $("#order-dialog").close();
     });
